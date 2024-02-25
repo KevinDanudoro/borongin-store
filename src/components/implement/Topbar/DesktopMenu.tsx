@@ -1,30 +1,22 @@
 import React from "react";
 import type { FC } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart } from "lucide-react";
 import { links } from "./topbar-links";
+import { cn } from "@/lib/utils";
 
-interface DesktopMenuProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface DesktopMenuProps extends React.HTMLAttributes<HTMLUListElement> {}
 
 const DesktopMenu: FC<DesktopMenuProps> = ({ className }) => {
   return (
-    <div className={className}>
-      <ul className="flex flex-row ">
-        {links.map((link) => (
+    <ul className={cn("flex flex-row md:gap-2 lg:gap-4 lg:mx-10", className)}>
+      {links.map((link) => {
+        return !link.mobileOnly ? (
           <li key={link.name}>
             <Link href={link.href}>{link.name}</Link>
           </li>
-        ))}
-      </ul>
-
-      <Button size="icon" variant={"link"} className="hidden md:block">
-        <Heart />
-      </Button>
-      <Button size="icon" variant={"link"} className="hidden md:block">
-        <ShoppingCart />
-      </Button>
-    </div>
+        ) : null;
+      })}
+    </ul>
   );
 };
 

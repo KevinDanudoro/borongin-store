@@ -2,9 +2,9 @@ import React from "react";
 import type { FC } from "react";
 import Topbar from "./Topbar";
 
-interface IndexProps {}
+export interface TopbarProps {}
 
-const Index: FC<IndexProps> = ({}) => {
+const Index: FC<TopbarProps> = ({}) => {
   return <Topbar />;
 };
 
