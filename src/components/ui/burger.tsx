@@ -23,21 +23,21 @@ const Burger: FC<BurgerProps> = ({
     >
       <span
         className={cn({
-          "h-1 w-full bg-slate-700 rounded-md block transition-all duration-150":
+          "h-1 w-full bg-foreground rounded-md block transition-all duration-150":
             true,
           "rotate-45 origin-left translate-x-1": isActive,
         })}
       />
       <span
         className={cn({
-          "h-1 w-full bg-slate-700 rounded-md block transition-all duration-150":
+          "h-1 w-full bg-foreground rounded-md block transition-all duration-150":
             true,
           "scale-0": isActive,
         })}
       />
       <span
         className={cn({
-          "h-1 w-full bg-slate-700 rounded-md block transition-all duration-150":
+          "h-1 w-full bg-foreground rounded-md block transition-all duration-150":
             true,
           "-rotate-45 origin-left translate-x-1": isActive,
         })}

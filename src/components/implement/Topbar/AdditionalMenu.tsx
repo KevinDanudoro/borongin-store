@@ -1,29 +1,29 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 import type { FC } from "react";
 
-interface AdditionalMenuProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface AdditionalMenuProps extends React.HTMLAttributes<HTMLAnchorElement> {}
 
 const AdditionalMenu: FC<AdditionalMenuProps> = ({ className, ...props }) => {
   return (
-    <div className={cn("flex flex-row gap-2 lg:gap-4", className)} {...props}>
-      <Button
-        size="icon"
-        variant={"link"}
-        className="text-foreground hidden md:block"
+    <>
+      <Link
+        href={"/"}
+        className={cn("text-foreground hidden md:block", className)}
+        {...props}
       >
         <Heart />
-      </Button>
-      <Button
-        size="icon"
-        variant={"link"}
-        className="text-foreground hidden md:block"
+      </Link>
+      <Link
+        href={"/"}
+        className={cn("text-foreground hidden md:block", className)}
+        {...props}
       >
         <ShoppingCart />
-      </Button>
-    </div>
+      </Link>
+    </>
   );
 };
 
