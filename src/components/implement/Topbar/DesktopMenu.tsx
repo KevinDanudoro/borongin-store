@@ -3,7 +3,7 @@
 import React from "react";
 import type { FC } from "react";
 import Link from "next/link";
-import { links } from "./topbar-links";
+import { links } from "./topbar-data";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 

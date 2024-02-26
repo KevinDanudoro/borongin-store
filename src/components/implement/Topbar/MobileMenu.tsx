@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import type { FC } from "react";
-import { links } from "./topbar-links";
+import { links } from "./topbar-data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Burger from "@/components/ui/burger";

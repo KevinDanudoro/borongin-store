@@ -12,7 +12,7 @@ const SearchInput: FC<SearchInputProps> = ({ className, ...props }) => {
       <Input
         type="text"
         placeholder="What are you looking for?"
-        className="pr-10 overflow-ellipsis"
+        className="pr-10 overflow-ellipsis bg-secondary"
       />
       <Search className="absolute right-2 top-1/2 -translate-y-1/2" />
     </div>
