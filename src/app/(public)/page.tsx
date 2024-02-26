@@ -1,3 +1,9 @@
+import HeroCarousel from "@/components/implement/HeroCarousel";
+
 export default function Home() {
-  return <h1>Narutoo</h1>;
+  return (
+    <div className="flex justify-center">
+      <HeroCarousel></HeroCarousel>
+    </div>
+  );
 }
