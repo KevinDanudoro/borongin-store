@@ -4,6 +4,9 @@ import ProductCarousel from "@/components/implement/ProductsCarousel.tsx";
 import Flag from "@/components/ui/flag";
 import Countdown from "@/components/ui/countdown";
 import Heading2 from "@/components/ui/heading2";
+import ProductCard from "../ProductCard/ProductCard";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface FlashsaleProps {}
 
@@ -17,17 +20,25 @@ const Flashsale: FC<FlashsaleProps> = ({}) => {
           <Countdown />
         </div>
       </div>
-      <ProductCarousel opts={{ dragFree: true, slidesToScroll: "auto" }}>
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
-        <p>6</p>
-        <p>7</p>
-        <p>8</p>
-        <p>9</p>
+      <ProductCarousel
+        opts={{ dragFree: true, slidesToScroll: "auto" }}
+        className="mb-14"
+      >
+        {Array.from({ length: 10 }).map((_, i) => (
+          <ProductCard
+            key={i}
+            name="S Series Chair"
+            price={100000 * (i + 1)}
+            discount={0.05 * (i + 1)}
+            imageSrc="/product.png"
+            rating={4.3}
+            isWishlist={false}
+          />
+        ))}
       </ProductCarousel>
+      <Link href={"/"}>
+        <Button className="mx-auto block">View All Products</Button>
+      </Link>
     </>
   );
 };

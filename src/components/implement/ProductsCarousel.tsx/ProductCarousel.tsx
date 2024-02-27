@@ -16,14 +16,14 @@ const ProductCarousel: FC<ProductCarouselProps> = ({ children, ...props }) => {
         {children?.map((child, i) => (
           <CarouselItem
             key={i}
-            className="pl-0 bg-red-200 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
+            className="pl-0 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
           >
             {child}
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden md:inline-flex -top-14 right-32 left-auto" />
-      <CarouselNext className="hidden md:inline-flex -top-14 right-20 left-auto" />
+      <CarouselPrevious className="hidden md:inline-flex -top-14 right-32 left-auto bg-secondary" />
+      <CarouselNext className="hidden md:inline-flex -top-14 right-20 left-auto bg-secondary" />
     </Carousel>
   );
 };

@@ -7,10 +7,10 @@ export default function Home() {
       <section className="mb-20 px-10 md:px-20 ">
         <HeroCarousel />
       </section>
-
       <section className="mb-20">
         <Flashsale />
       </section>
+      a
     </main>
   );
 }
