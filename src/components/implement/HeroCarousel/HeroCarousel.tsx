@@ -50,7 +50,7 @@ const HeroCarousel: FC<HeroCarouselProps> = ({}) => {
             <Image
               src="/hero-carousel.png"
               alt="Iphone 14 Series"
-              className="h-full object-contain flex-1"
+              className="object-cover h-56 w-56 md:h-72 md:w-72"
               height={512}
               width={512}
             />
