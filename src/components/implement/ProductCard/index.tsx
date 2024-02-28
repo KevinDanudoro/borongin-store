@@ -7,7 +7,7 @@ export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   imageSrc: string;
   price: number;
-  discount: number;
+  discount?: number;
   rating: number;
   isWishlist: boolean;
 }

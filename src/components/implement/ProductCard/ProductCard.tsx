@@ -17,11 +17,11 @@ const ProductCard: FC<ProductCardProps> = ({
   className,
   ...props
 }) => {
-  const discountPrice = price - Math.ceil(price * discount);
+  const discountPrice = discount ? price - Math.ceil(price * discount) : 0;
 
   return (
-    <div className={cn("space-y-2", className)} {...props}>
-      <div className="w-full aspect-square relative bg-secondary rounded-md">
+    <div className={cn("space-y-2 group/container", className)} {...props}>
+      <div className="w-full aspect-square relative bg-secondary rounded-md overflow-hidden">
         <Image
           src={imageSrc}
           alt="Product images"
@@ -29,9 +29,11 @@ const ProductCard: FC<ProductCardProps> = ({
           height={256}
           className="object-contain w-full p-8"
         />
-        <small className="bg-primary px-2 py-1 rounded-md absolute top-4 left-4 text-primary-foreground">
-          -{Math.floor(discount * 100)}%
-        </small>
+        {discount && (
+          <small className="bg-primary px-2 py-1 rounded-md absolute top-4 left-4 text-primary-foreground">
+            -{Math.floor(discount * 100)}%
+          </small>
+        )}
 
         <Button
           size="icon"
@@ -58,18 +60,28 @@ const ProductCard: FC<ProductCardProps> = ({
             className="group-hover:scale-y-125 transition-transform"
           />
         </Button>
+
+        <div className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-transform grid place-items-center">
+          Add To Cart
+        </div>
       </div>
 
       <h3 className="text-base text-foreground font-semibold line-clamp-1">
         {name}
       </h3>
 
-      <small className="text-xs text-primary">
-        Rp.{discountPrice.toLocaleString("id-ID")}
-        <span className="text-secondary-foreground line-through ml-2">
+      {discount ? (
+        <small className="text-xs text-primary">
+          Rp.{discountPrice.toLocaleString("id-ID")}
+          <span className="text-secondary-foreground line-through ml-2">
+            Rp.{price.toLocaleString("id-ID")}
+          </span>
+        </small>
+      ) : (
+        <small className="text-xs text-primary">
           Rp.{price.toLocaleString("id-ID")}
-        </span>
-      </small>
+        </small>
+      )}
 
       <small className="text-secondary-foreground flex gap-2 items-center text-xs">
         <Rating rating={rating} />
