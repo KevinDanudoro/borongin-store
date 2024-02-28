@@ -1,13 +1,13 @@
-import HeroCarousel from "@/components/implement/HeroCarousel";
-import Flashsale from "@/components/implement/FlashSale";
-import Category from "@/components/implement/Category";
+import Hero from "@/components/implement/Section/Hero";
+import Flashsale from "@/components/implement/Section/FlashSale";
+import Category from "@/components/implement/Section/Category";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
     <main className="py-10">
       <section className="mb-20 px-10 md:px-20">
-        <HeroCarousel />
+        <Hero />
       </section>
 
       <section className="">

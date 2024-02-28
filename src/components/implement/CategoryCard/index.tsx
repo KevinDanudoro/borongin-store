@@ -6,6 +6,7 @@ import { LucideIcon } from "lucide-react";
 export interface CategoryCardProps {
   icon: LucideIcon;
   category: string;
+  active: boolean;
 }
 
 const Index: FC<CategoryCardProps> = (props) => {

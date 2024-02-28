@@ -1,11 +1,11 @@
 import React from "react";
 import type { FC } from "react";
-import HeroCarousel from "./HeroCarousel";
+import Hero from "./Hero";
 
 interface IndexProps {}
 
 const Index: FC<IndexProps> = ({}) => {
-  return <HeroCarousel />;
+  return <Hero />;
 };
 
 export default Index;
