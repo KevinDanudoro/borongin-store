@@ -1,6 +1,6 @@
 import React from "react";
 import type { FC } from "react";
-import ProductCarousel from "@/components/implement/ProductsCarousel.tsx";
+import ItemsCarousel from "@/components/implement/ItemsCarousel";
 import Flag from "@/components/ui/flag";
 import Countdown from "@/components/ui/countdown";
 import Heading2 from "@/components/ui/heading2";
@@ -20,9 +20,10 @@ const Flashsale: FC<FlashsaleProps> = ({}) => {
           <Countdown />
         </div>
       </div>
-      <ProductCarousel
+
+      <ItemsCarousel
         opts={{ dragFree: true, slidesToScroll: "auto" }}
-        className="mb-14"
+        className="mb-14 mx-10 md:mx-20 "
       >
         {Array.from({ length: 10 }).map((_, i) => (
           <ProductCard
@@ -35,9 +36,10 @@ const Flashsale: FC<FlashsaleProps> = ({}) => {
             isWishlist={false}
           />
         ))}
-      </ProductCarousel>
-      <Link href={"/"}>
-        <Button className="mx-auto block">View All Products</Button>
+      </ItemsCarousel>
+
+      <Link href={"/"} className="w-fit mx-auto block">
+        <Button>View All Products</Button>
       </Link>
     </>
   );
