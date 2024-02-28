@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import React from "react";
 import type { FC } from "react";
 
-export interface ProductCardProps {
+export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   imageSrc: string;
   price: number;

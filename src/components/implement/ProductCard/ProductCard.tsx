@@ -14,11 +14,13 @@ const ProductCard: FC<ProductCardProps> = ({
   discount,
   rating,
   isWishlist,
+  className,
+  ...props
 }) => {
   const discountPrice = price - Math.ceil(price * discount);
 
   return (
-    <div className="space-y-2">
+    <div className={cn("space-y-2", className)} {...props}>
       <div className="w-full aspect-square relative bg-secondary rounded-md">
         <Image
           src={imageSrc}

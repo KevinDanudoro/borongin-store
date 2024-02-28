@@ -32,9 +32,9 @@ const Flashsale: FC<FlashsaleProps> = ({}) => {
 
       <Carousel
         opts={{ dragFree: true, slidesToScroll: "auto" }}
-        className="mb-14 mx-10 md:mx-20 "
+        className="mb-14"
       >
-        <CarouselContent className="cursor-grab active:cursor-grabbing select-none m-0">
+        <CarouselContent className="cursor-grab active:cursor-grabbing select-none m-0 mx-10 md:mx-16">
           {Array.from({ length: 10 }).map((_, i) => (
             <CarouselItem
               className="px-1 md:px-3 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"

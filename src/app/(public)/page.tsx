@@ -2,23 +2,33 @@ import Hero from "@/components/implement/Section/Hero";
 import Flashsale from "@/components/implement/Section/FlashSale";
 import Category from "@/components/implement/Section/Category";
 import { Separator } from "@/components/ui/separator";
+import BestSale from "@/components/implement/Section/BestSale/BestSale";
+import SectionLayout from "@/components/layout/SectionLayout";
 
 export default function Home() {
   return (
     <main className="py-10">
-      <section className="mb-20 px-10 md:px-20">
+      <SectionLayout>
         <Hero />
-      </section>
+      </SectionLayout>
 
-      <section className="">
+      <Separator className="mx-10 md:mx-20 w-auto my-20" />
+
+      <section>
         <Flashsale />
       </section>
 
       <Separator className="mx-10 md:mx-20 w-auto my-20" />
 
-      <section className="px-10 md:px-20">
+      <SectionLayout>
         <Category />
-      </section>
+      </SectionLayout>
+
+      <Separator className="mx-10 md:mx-20 w-auto my-20" />
+
+      <SectionLayout>
+        <BestSale />
+      </SectionLayout>
     </main>
   );
 }

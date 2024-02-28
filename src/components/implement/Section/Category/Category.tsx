@@ -31,8 +31,8 @@ const Category: FC<CategoryProps> = ({}) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden md:inline-flex -top-14 right-32 left-auto bg-secondary border-none" />
-        <CarouselNext className="hidden md:inline-flex -top-14 right-20 left-auto bg-secondary border-none" />
+        <CarouselPrevious className="hidden md:inline-flex -top-14 right-16 left-auto bg-secondary border-none" />
+        <CarouselNext className="hidden md:inline-flex -top-14 right-5 left-auto bg-secondary border-none" />
       </Carousel>
     </>
   );
