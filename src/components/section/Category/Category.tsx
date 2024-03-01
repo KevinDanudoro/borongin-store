@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import CategoryCard from "@/components/implement/CategoryCard";
 import { CategoryProps } from ".";
+import Link from "next/link";
 
 const Category: FC<CategoryProps> = ({}) => {
   return (
@@ -27,7 +28,13 @@ const Category: FC<CategoryProps> = ({}) => {
               className="px-1 md:px-3 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
               key={i}
             >
-              <CategoryCard icon={Phone} category="SmartPhone" active={false} />
+              <Link href={"/"}>
+                <CategoryCard
+                  icon={Phone}
+                  category="SmartPhone"
+                  active={false}
+                />
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

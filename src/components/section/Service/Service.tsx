@@ -17,7 +17,9 @@ const Service: FC<ServiceProps> = ({}) => {
               className="bg-foreground text-background rounded-full border-8 border-secondary/80 p-2 mb-3"
             />
             <h3 className="uppercase text-lg font-semibold">{service.title}</h3>
-            <p className="text-xs font-normal">{service.desc}</p>
+            <p className="text-xs font-normal first-letter:uppercase">
+              {service.desc}
+            </p>
           </div>
         );
       })}
