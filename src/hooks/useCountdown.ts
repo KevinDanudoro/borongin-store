@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 const targetDate = new Date("2024-03-01T00:00:00");
 
 const useCountdown = () => {
-  const [countdown, setCountdown] = useState(
-    targetDate.getTime() - new Date().getTime()
-  );
+  const initValue = targetDate.getTime() - new Date().getTime();
+  const [countdown, setCountdown] = useState(initValue > 0 ? initValue : 0);
 
   useEffect(() => {
-    if (!countdown) return;
+    if (countdown <= 0) return;
 
     const interval = setInterval(() => {
       setCountdown((_) => {

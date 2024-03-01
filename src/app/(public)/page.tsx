@@ -1,9 +1,10 @@
-import Hero from "@/components/implement/Section/Hero";
-import Flashsale from "@/components/implement/Section/FlashSale";
-import Category from "@/components/implement/Section/Category";
-import { Separator } from "@/components/ui/separator";
-import BestSale from "@/components/implement/Section/BestSale/BestSale";
+import Hero from "@/components/section/Hero";
+import Flashsale from "@/components/section/FlashSale";
+import Category from "@/components/section/Category";
+import BestSale from "@/components/section/BestSale/BestSale";
 import SectionLayout from "@/components/layout/SectionLayout";
+import { Separator } from "@/components/ui/separator";
+import Service from "@/components/section/Service/Service";
 
 export default function Home() {
   return (
@@ -29,6 +30,14 @@ export default function Home() {
       <SectionLayout>
         <BestSale />
       </SectionLayout>
+
+      <Separator className="w-auto mb-36 h-0" />
+
+      <SectionLayout>
+        <Service />
+      </SectionLayout>
+
+      <Separator className="w-auto mb-28 h-0" />
     </main>
   );
 }

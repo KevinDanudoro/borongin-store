@@ -16,9 +16,9 @@ import Pagination from "./Pagination";
 import useCarouselPagination from "@/hooks/useCarouselPagination";
 import { Apple, ArrowRight } from "lucide-react";
 
-interface HeroCarouselProps {}
+interface HeroProps {}
 
-const HeroCarousel: FC<HeroCarouselProps> = ({}) => {
+const Hero: FC<HeroProps> = ({}) => {
   const [api, setApi] = useState<CarouselApi>();
   const pagination = useCarouselPagination(api);
 
@@ -67,4 +67,4 @@ const HeroCarousel: FC<HeroCarouselProps> = ({}) => {
   );
 };
 
-export default HeroCarousel;
+export default Hero;
