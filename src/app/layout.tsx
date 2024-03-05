@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Topbar from "@/components/implement/Topbar";
-import Footer from "@/components/implement/Footer";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -24,11 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(poppins.className, "bg-background")}>
-        <Topbar />
-        {children}
-        <Footer />
-      </body>
+      <body className={cn(poppins.className, "bg-background")}>{children}</body>
     </html>
   );
 }
