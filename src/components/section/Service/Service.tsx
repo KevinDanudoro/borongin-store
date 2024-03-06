@@ -7,7 +7,7 @@ interface ServiceProps {}
 const Service: FC<ServiceProps> = ({}) => {
   const data = serviceData;
   return (
-    <div className="flex flex-row justify-evenly">
+    <div className="flex flex-col justify-evenly gap-y-12 md:flex-row md:gap-x-8">
       {data.map((service) => {
         const Icon = service.icon;
         return (
@@ -16,8 +16,10 @@ const Service: FC<ServiceProps> = ({}) => {
               size={60}
               className="bg-foreground text-background rounded-full border-8 border-secondary/80 p-2 mb-3"
             />
-            <h3 className="uppercase text-lg font-semibold">{service.title}</h3>
-            <p className="text-xs font-normal first-letter:uppercase">
+            <h3 className="uppercase text-lg font-semibold text-center">
+              {service.title}
+            </h3>
+            <p className="text-xs font-normal first-letter:uppercase text-center">
               {service.desc}
             </p>
           </div>

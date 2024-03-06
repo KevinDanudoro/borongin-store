@@ -20,7 +20,7 @@ const Topbar: FC<TopbarProps> = ({ isInAuthPage }) => {
         <div className="col-start-2 md:col-start-3 flex gap-6 items-center">
           <SearchInput />
           {!isInAuthPage && <AdditionalMenu className="hidden md:flex" />}
-          <AvatarMenu className="hidden md:block" />
+          {!isInAuthPage && <AvatarMenu />}
         </div>
 
         <MobileMenu className="col-start-3 md:hidden" />
