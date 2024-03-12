@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import Image from "next/image";
-import { Eye, Heart } from "lucide-react";
+import { Eye, Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Rating from "@/components/ui/rating";
 import { ProductCardProps } from ".";
@@ -64,8 +64,8 @@ const ProductCard: FC<ProductCardProps> = ({
           />
         </Button>
 
-        <span className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all grid place-items-center hover:bg-primary cursor-pointer">
-          Add To Cart
+        <span className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer">
+          <ShoppingCart /> Add To Cart
         </span>
       </div>
 

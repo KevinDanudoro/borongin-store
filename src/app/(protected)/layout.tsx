@@ -8,7 +8,7 @@ interface LayoutProps extends PropsWithChildren {}
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Topbar />
+      <Topbar isAuth={true} />
       {children}
       <Footer />
     </>

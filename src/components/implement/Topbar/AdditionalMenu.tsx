@@ -10,14 +10,14 @@ const AdditionalMenu: FC<AdditionalMenuProps> = ({ className, ...props }) => {
   return (
     <>
       <Link
-        href={"/"}
+        href={"/wishlist"}
         className={cn("text-foreground hidden md:block", className)}
         {...props}
       >
         <Heart />
       </Link>
       <Link
-        href={"/"}
+        href={"/cart"}
         className={cn("text-foreground hidden md:block", className)}
         {...props}
       >
