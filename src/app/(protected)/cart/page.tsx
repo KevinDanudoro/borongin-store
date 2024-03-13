@@ -26,26 +26,32 @@ const Page: FC<PageProps> = ({}) => {
   }, [tableData]);
 
   return (
-    <SectionLayout>
-      <h2 className="text-xl my-10 font-semibold searching">Cart (4)</h2>
-      <CartTable table={table} />
+    <main>
+      <SectionLayout>
+        <h2 className="text-xl my-10 font-semibold searching">Cart (4)</h2>
+      </SectionLayout>
+
+      <SectionLayout>
+        <CartTable table={table} />
+      </SectionLayout>
 
       <Separator className="h-0 my-10" />
 
-      <Link href={""}>
-        <Button variant="outline">Return To Shop</Button>
-      </Link>
+      <SectionLayout>
+        <Link href={""}>
+          <Button variant="outline">Return To Shop</Button>
+        </Link>
+      </SectionLayout>
 
       <Separator className="h-0 my-10" />
 
-      <div className="grid grid-rows-[auto,auto] md:grid-cols-2 gap-8 md:gap-16">
+      <SectionLayout className="grid grid-rows-[auto,auto] md:grid-cols-2 gap-8 md:gap-16">
         <Coupon />
-
         <CartTotal subTotal={subTotal} />
-      </div>
+      </SectionLayout>
 
       <Separator className="h-0 mb-10" />
-    </SectionLayout>
+    </main>
   );
 };
 

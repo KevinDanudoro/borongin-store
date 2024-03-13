@@ -6,9 +6,9 @@ interface PageProps {}
 
 const Page: FC<PageProps> = ({}) => {
   return (
-    <section className="px-10 md:px-20 md:w-full md:max-w-xl md:mx-auto">
+    <main className="px-10 md:px-20 md:w-full md:max-w-xl md:mx-auto">
       <SignUp />
-    </section>
+    </main>
   );
 };
 

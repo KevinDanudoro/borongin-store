@@ -16,7 +16,9 @@ const Page: FC<PageProps> = ({}) => {
             Add All To Cart
           </Button>
         </div>
+      </SectionLayout>
 
+      <SectionLayout>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-4 gap-y-8 mb-20">
           {Array.from({ length: 10 }).map((_, i) => (
             <ProductCard
