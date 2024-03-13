@@ -37,32 +37,35 @@ const ProductCard: FC<ProductCardProps> = ({
             -{Math.floor(discount * 100)}%
           </small>
         )}
+        <div className="absolute top-3 right-3 flex flex-col gap-3">
+          {isWishlist !== undefined && (
+            <Button
+              size="icon"
+              variant="link"
+              className="bg-background text-foreground rounded-full w-fit h-fit p-2 group"
+            >
+              <Heart
+                size={18}
+                className={cn({
+                  "fill-white group-hover:fill-red-500 stroke-red-500 transition-colors":
+                    true,
+                  "fill-red-500 stroke-red-500": isWishlist === true,
+                })}
+              />
+            </Button>
+          )}
 
-        <Button
-          size="icon"
-          variant="link"
-          className="bg-background text-foreground absolute top-4 right-4 rounded-full w-fit h-fit p-2 group"
-        >
-          <Heart
-            size={18}
-            className={cn({
-              "fill-white group-hover:fill-red-500 stroke-red-500 transition-colors":
-                true,
-              "fill-red-500 stroke-red-500": isWishlist,
-            })}
-          />
-        </Button>
-
-        <Button
-          size="icon"
-          variant="link"
-          className="bg-background text-foreground absolute top-16 right-4 rounded-full w-fit h-fit p-2 group"
-        >
-          <Eye
-            size={18}
-            className="group-hover:scale-y-125 transition-transform"
-          />
-        </Button>
+          <Button
+            size="icon"
+            variant="link"
+            className="bg-background text-foreground rounded-full w-fit h-fit p-2 group"
+          >
+            <Eye
+              size={18}
+              className="group-hover:scale-y-125 transition-transform"
+            />
+          </Button>
+        </div>
 
         <span className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer">
           <ShoppingCart /> Add To Cart

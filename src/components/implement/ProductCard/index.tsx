@@ -9,7 +9,7 @@ export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   price: number;
   discount?: number;
   rating: number;
-  isWishlist: boolean;
+  isWishlist?: boolean;
 }
 
 const Index: FC<ProductCardProps> = (props) => {
