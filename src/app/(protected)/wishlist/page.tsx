@@ -11,7 +11,7 @@ const Page: FC<PageProps> = ({}) => {
     <main>
       <SectionLayout>
         <div className="w-full flex flex-row justify-between items-center my-10">
-          <h2 className="text-lg">Wishlist (4)</h2>
+          <h2 className="text-xl font-semibold">Wishlist (4)</h2>
           <Button className="px-8" variant="outline">
             Add All To Cart
           </Button>
