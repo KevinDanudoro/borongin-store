@@ -2,15 +2,16 @@
 
 import React, { useMemo } from "react";
 import type { FC } from "react";
-import SectionLayout from "@/components/layout/SectionLayout";
-import CartTable from "@/components/section/CartTable/CartTable";
 import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { columns, data } from "./table";
+import SectionLayout from "@/components/layout/SectionLayout";
+import CartTotal from "@/components/section/CartTotal/CartTotal";
+import CartTable from "@/components/section/CartTable/CartTable";
 import Coupon from "@/components/section/Coupon/Coupon";
 import useCartTable from "@/hooks/useCartTable";
-import CartTotal from "@/components/section/CartTotal/CartTotal";
+import { columns, data } from "./table";
 
 interface PageProps {}
 
