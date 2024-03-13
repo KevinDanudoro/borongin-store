@@ -27,7 +27,7 @@ const Page: FC<PageProps> = ({}) => {
 
   return (
     <SectionLayout>
-      <h2 className="text-xl my-10 font-semibold">Cart (4)</h2>
+      <h2 className="text-xl my-10 font-semibold searching">Cart (4)</h2>
       <CartTable table={table} />
 
       <Separator className="h-0 my-10" />
