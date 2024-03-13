@@ -27,7 +27,7 @@ const Topbar: FC<TopbarProps> = ({ isAuth, isInAuthPage }) => {
           <MobileMenu className="col-start-3 md:hidden" />
         </nav>
       </header>
-      <div className="bg-black/30 fixed inset-0 z-20 hidden peer-has-[.search:focus]:block" />
+      <div className="bg-black/45 fixed inset-0 z-20 hidden peer-has-[.search:focus]:block" />
     </>
   );
 };
