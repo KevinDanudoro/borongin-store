@@ -12,7 +12,7 @@ import { TopbarProps } from ".";
 const Topbar: FC<TopbarProps> = ({ isAuth, isInAuthPage }) => {
   return (
     <>
-      <header className="border-b-2 border-secondary py-1 px-5 sm:px-10 md:px-14 lg:px-20 sticky top-0 z-[99] bg-background peer">
+      <header className="border-b-2 border-secondary py-1 px-5 sm:px-10 md:px-14 lg:px-20 sticky top-0 z-[49] bg-background peer">
         <nav className="grid grid-cols-[auto,1fr,auto] md:grid-cols-[auto,1fr,auto] place-items-center h-14 gap-4 md:gap-10">
           <h1 className="col-start-1 text-xl font-bold">Borongin</h1>
 
@@ -27,7 +27,7 @@ const Topbar: FC<TopbarProps> = ({ isAuth, isInAuthPage }) => {
           <MobileMenu className="col-start-3 md:hidden" />
         </nav>
       </header>
-      <div className="bg-black/45 fixed inset-0 z-20 hidden peer-has-[.search:focus]:block" />
+      <div className="bg-black/70 fixed inset-0 z-20 hidden peer-has-[.search:focus]:block" />
     </>
   );
 };
