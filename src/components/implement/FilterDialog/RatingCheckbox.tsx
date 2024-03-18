@@ -11,8 +11,8 @@ import type { FC } from "react";
 import { Control } from "react-hook-form";
 
 interface RatingCheckboxProps {
-  control: Control<{ rating?: number[] | null | undefined }>;
-  value: number;
+  control: Control<{ rating?: string[] | null | undefined }>;
+  value: string;
 }
 
 const RatingCheckbox: FC<RatingCheckboxProps> = ({ control, value }) => {
@@ -25,6 +25,7 @@ const RatingCheckbox: FC<RatingCheckboxProps> = ({ control, value }) => {
           <FormControl>
             <Checkbox
               {...field}
+              className="w-6 h-6"
               value={value}
               checked={field.value?.includes(value)}
               onCheckedChange={(checked) => {

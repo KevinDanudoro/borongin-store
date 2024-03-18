@@ -18,25 +18,17 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { filterSchema } from "@/schema/fitlerSchema";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import PriceInput from "./PriceInput";
 import RatingCheckbox from "./RatingCheckbox";
+import useFilterForm from "@/hooks/useFilterForm";
 
 interface FilterSearchProps {
   trigger: React.ReactNode;
 }
 
 const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
-  const form = useForm<z.infer<typeof filterSchema>>({
-    resolver: zodResolver(filterSchema),
-  });
-  const onSubmit = (values: z.infer<typeof filterSchema>) => {
-    console.log(values);
-  };
+  const { form, onSubmit } = useFilterForm();
 
   return (
     <Dialog>
@@ -47,7 +39,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
         </DialogHeader>
 
         <Form {...form}>
-          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="space-y-4" onSubmit={onSubmit}>
             <div className="grid grid-cols-[repeat(3,auto)] gap-2 items-center">
               <h3 className="text-base font-medium col-span-full">By Price</h3>
               <FormField
@@ -103,7 +95,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
                       <RatingCheckbox
                         key={i}
                         control={form.control}
-                        value={i + 1}
+                        value={`${i + 1}`}
                       />
                     ))}
                     <FormMessage className="col-start-1" />
