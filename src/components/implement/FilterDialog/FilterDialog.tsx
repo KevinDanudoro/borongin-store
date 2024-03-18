@@ -5,6 +5,7 @@ import type { FC } from "react";
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -17,13 +18,13 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import PriceInput from "./PriceInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { filterSchema } from "@/schema/fitlerSchema";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import PriceInput from "./PriceInput";
+import RatingCheckbox from "./RatingCheckbox";
 
 interface FilterSearchProps {
   trigger: React.ReactNode;
@@ -56,9 +57,11 @@ const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
                   <FormItem>
                     <FormControl>
                       <PriceInput
+                        {...field}
+                        value={field.value ?? ""}
                         className="flex-1"
                         placeholder="Minimum price"
-                        {...field}
+                        autoComplete="off"
                       />
                     </FormControl>
                     <FormMessage className="first-letter:uppercase" />
@@ -75,9 +78,11 @@ const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
                   <FormItem>
                     <FormControl>
                       <PriceInput
+                        {...field}
+                        value={field.value ?? ""}
                         className="flex-1"
                         placeholder="Minimum price"
-                        {...field}
+                        autoComplete="off"
                       />
                     </FormControl>
                     <FormMessage className="first-letter:uppercase" />
@@ -88,21 +93,28 @@ const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
 
             <div className="space-y-2 items-center">
               <h3 className="text-base font-medium">By Rating</h3>
+
               <FormField
                 control={form.control}
                 name="rating"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage className="first-letter:uppercase" />
+                render={() => (
+                  <FormItem className="grid grid-cols-[repeat(auto-fit,minmax(50px,1fr))] space-y-0 gap-x-8 gap-y-2">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <RatingCheckbox
+                        key={i}
+                        control={form.control}
+                        value={i + 1}
+                      />
+                    ))}
+                    <FormMessage className="col-start-1" />
                   </FormItem>
                 )}
               />
             </div>
 
-            <Button type="submit">Apply Filter</Button>
+            <DialogClose asChild={true}>
+              <Button type="submit">Apply Filter</Button>
+            </DialogClose>
           </form>
         </Form>
       </DialogContent>

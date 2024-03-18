@@ -19,10 +19,10 @@ const PriceInput = React.forwardRef<HTMLInputElement, PriceInputProps>(
       <div className={cn("relative", className)}>
         <Input
           {...props}
+          ref={ref}
           onChange={onInputChange}
           placeholder={placeholder}
           className="pl-12 peer"
-          ref={ref}
         />
         <span className="absolute top-0 bottom-0 left-0 aspect-square rounded-md bg-secondary border-2 border-secondary-foreground grid place-items-center peer-focus-visible:border-primary peer-focus-visible:bg-primary/10">
           Rp
