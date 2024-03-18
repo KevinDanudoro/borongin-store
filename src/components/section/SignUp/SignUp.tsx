@@ -44,7 +44,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
                   <Input
                     placeholder="Enter your name"
                     {...field}
-                    className="border-x-0 border-t-0 rounded-none border-b border-secondary-foreground focus-visible:ring-0"
+                    className="border-x-0 border-t-0 rounded-none border-b border-secondary-foreground focus-visible:ring-0 focus-visible:border-x-0 focus-visible:border-t-0"
                   />
                 </FormControl>
                 <FormMessage className="first-letter:uppercase" />
@@ -61,7 +61,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
                   <Input
                     placeholder="Enter your email address"
                     {...field}
-                    className="border-x-0 border-t-0 rounded-none border-b border-secondary-foreground focus-visible:ring-0"
+                    className="border-x-0 border-t-0 rounded-none border-b border-secondary-foreground focus-visible:ring-0 focus-visible:border-x-0 focus-visible:border-t-0"
                   />
                 </FormControl>
                 <FormMessage className="first-letter:uppercase" />
@@ -79,7 +79,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
                     type="password"
                     placeholder="Enter your password"
                     {...field}
-                    className="border-x-0 border-t-0 rounded-none border-b border-secondary-foreground focus-visible:ring-0"
+                    className="border-x-0 border-t-0 rounded-none border-b border-secondary-foreground focus-visible:ring-0 focus-visible:border-x-0 focus-visible:border-t-0"
                   />
                 </FormControl>
                 <FormMessage className="first-letter:uppercase" />
