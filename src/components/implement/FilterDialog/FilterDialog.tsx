@@ -21,14 +21,14 @@ import {
 import { Button } from "@/components/ui/button";
 import PriceInput from "./PriceInput";
 import RatingCheckbox from "./RatingCheckbox";
-import useFilterForm from "@/hooks/useFilterForm";
+import useFilter from "@/hooks/useFilter";
 
 interface FilterSearchProps {
   trigger: React.ReactNode;
 }
 
 const FilterSearch: FC<FilterSearchProps> = ({ trigger }) => {
-  const { form, onSubmit } = useFilterForm();
+  const { form, onSubmit } = useFilter();
 
   return (
     <Dialog>

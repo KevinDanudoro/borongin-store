@@ -19,7 +19,7 @@ const getSearchParamsValues = (searchParams: ReadonlyURLSearchParams) => {
   };
 };
 
-const useFilterForm = () => {
+const useFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -47,4 +47,4 @@ const useFilterForm = () => {
   return { form, onSubmit: form.handleSubmit(handleFormSubmit) };
 };
 
-export default useFilterForm;
+export default useFilter;
