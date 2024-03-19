@@ -32,7 +32,7 @@ const Page: FC<PageProps> = ({}) => {
             <ProductCard
               key={i}
               name="Gucci duffle bag"
-              imageSrc="/product.png"
+              imageSrc="/image/product.png"
               isWishlist={false}
               price={100000}
               rating={4.3}

@@ -2,7 +2,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const useSearchInput = (): React.HTMLAttributes<HTMLInputElement> => {
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const [searchValue, setSearchValue] = useState("");
@@ -13,7 +12,7 @@ const useSearchInput = (): React.HTMLAttributes<HTMLInputElement> => {
 
   const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     params.set("keyword", searchValue);
 
     router.push(`/search?${params}`);

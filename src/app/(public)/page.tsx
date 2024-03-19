@@ -13,7 +13,7 @@ export default function Home() {
         <Hero />
       </SectionLayout>
 
-      <Separator className="mx-10 md:mx-20 w-auto my-20" />
+      <Separator className="mx-10 md:mx-20 w-auto my-20 h-0" />
 
       <section>
         <Flashsale />

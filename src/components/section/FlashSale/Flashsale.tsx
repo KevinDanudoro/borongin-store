@@ -44,7 +44,7 @@ const Flashsale: FC<FlashsaleProps> = ({}) => {
                 name="S Series Chair"
                 price={100000 * (i + 1)}
                 discount={0.05 * (i + 1)}
-                imageSrc="/product.png"
+                imageSrc="/image/product.png"
                 rating={4.3}
                 isWishlist={false}
               />

@@ -22,7 +22,7 @@ const BestSale: FC<BestSaleProps> = ({}) => {
             key={i}
             name="S Series Chair"
             price={100000 * (i + 1)}
-            imageSrc="/product.png"
+            imageSrc="/image/product.png"
             rating={4.3}
             isWishlist={false}
           />

@@ -12,9 +12,12 @@ const getSearchParamsValues = (searchParams: ReadonlyURLSearchParams) => {
   const price = searchParams.get("price")?.split("-") ?? [];
   const rating = searchParams.get("rating")?.split("-") ?? [];
 
+  const minPrice = parseInt(price[0], 10);
+  const maxPrice = parseInt(price[1], 10);
+
   return {
-    minPrice: parseInt(price[0]).toLocaleString(),
-    maxPrice: parseInt(price[1]).toLocaleString(),
+    minPrice: isNaN(minPrice) ? "" : minPrice.toLocaleString(),
+    maxPrice: isNaN(maxPrice) ? "" : maxPrice.toLocaleString(),
     rating: rating,
   };
 };

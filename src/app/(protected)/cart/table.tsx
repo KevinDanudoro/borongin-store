@@ -7,13 +7,13 @@ import { Input } from "@/components/ui/input";
 export const data: Product[] = [
   {
     name: "Motivated Chair 1",
-    image: "/product.png",
+    image: "/image/product.png",
     price: 1000000,
     quantity: 2,
   },
   {
     name: "Motivated Chair 2",
-    image: "/product.png",
+    image: "/image/product.png",
     price: 1500000,
     quantity: 4,
   },
