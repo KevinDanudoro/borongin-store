@@ -1,9 +1,31 @@
 import { buyProductSchema } from "@/schema/productSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  ReadonlyURLSearchParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+const getDefaultValue = (searchParams: ReadonlyURLSearchParams) => {
+  const quantity = searchParams.get("quantity");
+  const size = searchParams.get("size");
+
+  const parsedQuantity = !!quantity?.length ? parseInt(quantity, 10) : 1;
+  const parsedSize = !!size?.length ? size : undefined;
+
+  const defaultValues = buyProductSchema.safeParse({
+    quantity: parsedQuantity,
+    size: parsedSize,
+  });
+
+  if (!defaultValues.success) return {};
+
+  return defaultValues.data;
+};
 
 const useSubmitProduct = () => {
   const searchParams = useSearchParams();
@@ -12,10 +34,7 @@ const useSubmitProduct = () => {
 
   const form = useForm<z.infer<typeof buyProductSchema>>({
     resolver: zodResolver(buyProductSchema),
-    defaultValues: {
-      quantity: 1,
-      size: "s",
-    },
+    defaultValues: getDefaultValue(searchParams),
   });
 
   const { watch } = form;

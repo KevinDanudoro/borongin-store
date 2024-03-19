@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import useSubmitProduct from "@/hooks/useSubmitProduct";
-import { buyProductSchema } from "@/schema/productSchema";
 
 interface ProductFormProps {}
 
@@ -40,10 +39,8 @@ const ProductForm: FC<ProductFormProps> = ({}) => {
               <ToggleGroup
                 type="single"
                 className="space-x-2"
-                onValueChange={(
-                  newValue: z.infer<typeof buyProductSchema>["size"]
-                ) => field.onChange(newValue)}
-                defaultValue={field.value}
+                onValueChange={(newValue: string) => field.onChange(newValue)}
+                defaultValue={field.value ?? undefined}
               >
                 {sizeVariant.map((value) => (
                   <ToggleGroupItem
