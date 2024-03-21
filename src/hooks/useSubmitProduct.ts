@@ -15,7 +15,7 @@ const getDefaultValue = (searchParams: ReadonlyURLSearchParams) => {
   const size = searchParams.get("size");
 
   const parsedQuantity = !!quantity?.length ? parseInt(quantity, 10) : 1;
-  const parsedSize = !!size?.length ? size : undefined;
+  const parsedSize = !!size?.length ? size : "s";
 
   const defaultValues = buyProductSchema.safeParse({
     quantity: parsedQuantity,
@@ -54,9 +54,10 @@ const useSubmitProduct = () => {
 
   const onSubmit = (e: z.infer<typeof buyProductSchema>) => {
     console.log(e);
+    router.push("/checkout/1");
   };
 
-  return { form, onSubmit };
+  return { form, onSubmit: form.handleSubmit(onSubmit) };
 };
 
 export default useSubmitProduct;

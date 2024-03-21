@@ -3,7 +3,14 @@
 import React from "react";
 import type { FC } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Heart, Minus, Plus } from "lucide-react";
+import {
+  Heart,
+  MessageCircle,
+  Minus,
+  Plus,
+  Share,
+  ShoppingCart,
+} from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -18,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import useSubmitProduct from "@/hooks/useSubmitProduct";
+import { Separator } from "@/components/ui/separator";
 
 interface ProductFormProps {}
 
@@ -28,7 +36,7 @@ const ProductForm: FC<ProductFormProps> = ({}) => {
 
   return (
     <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="space-y-6" onSubmit={onSubmit}>
         <div className="flex flex-row items-center">
           <p className="mr-5">Size: </p>
 
@@ -93,10 +101,30 @@ const ProductForm: FC<ProductFormProps> = ({}) => {
               </FormItem>
             )}
           />
+
           <Button type="submit">Buy Now</Button>
-          <Button variant="outline" className="p-2 aspect-square">
-            <Heart />
+
+          <Button type="button" variant="outline" className="p-2 aspect-square">
+            <ShoppingCart />
           </Button>
+
+          <div className="*:text-foreground/80 flex flex-row gap-4 *:text-sm hover:*:text-foreground col-span-full">
+            <Button type="button" variant="link" className="p-0">
+              <Heart className="mr-2 w-5 aspect-square" /> Wishlist
+            </Button>
+
+            <Separator orientation="vertical" />
+
+            <Button type="button" variant="link" className="p-0">
+              <Share className="mr-2 w-5 aspect-square" /> Share
+            </Button>
+
+            <Separator orientation="vertical" />
+
+            <Button type="button" variant="link" className="p-0">
+              <MessageCircle className="mr-2 w-5 aspect-square" /> Chat
+            </Button>
+          </div>
         </div>
       </form>
     </Form>

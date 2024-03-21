@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const buyProductSchema = z.object({
-  size: z.enum(["xs", "s", "m", "l", "xl"]).nullish(),
+  size: z.enum(["xs", "s", "m", "l", "xl"]),
   quantity: z.coerce.number().min(1),
 });
 
