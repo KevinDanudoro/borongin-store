@@ -1,8 +1,10 @@
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
-const useSearchInput = (): React.HTMLAttributes<HTMLInputElement> => {
+const useSearchInput = (): React.InputHTMLAttributes<HTMLInputElement> &
+  React.RefAttributes<HTMLInputElement> => {
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -16,9 +18,10 @@ const useSearchInput = (): React.HTMLAttributes<HTMLInputElement> => {
     params.set("keyword", searchValue);
 
     router.push(`/search?${params}`);
+    inputRef.current?.blur();
   };
 
-  return { onChange: onInputChange, onKeyDown: onEnterPress };
+  return { onChange: onInputChange, onKeyDown: onEnterPress, ref: inputRef };
 };
 
 export default useSearchInput;
