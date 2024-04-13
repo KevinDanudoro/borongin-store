@@ -14,10 +14,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import ProductCard from "@/components/implement/ProductCard/ProductCard";
+import { getFlashSaleProductController } from "@/controller/product";
 
 interface FlashsaleProps {}
 
-const Flashsale: FC<FlashsaleProps> = ({}) => {
+const Flashsale: FC<FlashsaleProps> = async ({}) => {
+  const product = await getFlashSaleProductController();
+  if (!product) throw new Error("Failed get flash sale product");
+
   return (
     <>
       <div className="px-10 md:px-20 mb-10">
@@ -33,7 +37,7 @@ const Flashsale: FC<FlashsaleProps> = ({}) => {
         className="mb-14"
       >
         <CarouselContent className="cursor-grab active:cursor-grabbing select-none m-0 mx-10 md:mx-16">
-          {Array.from({ length: 10 }).map((_, i) => (
+          {product.map((_, i) => (
             <CarouselItem
               className="px-1 md:px-3 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
               key={i}

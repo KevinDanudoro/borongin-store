@@ -1,15 +1,21 @@
 import { getProductSchema } from "@/model/product";
 import { getAllProducts } from "@/model/product/action";
+import { responseSchema } from "@/model/respone";
 
-export const getFlashSaleProducts = async () => {
+export const getFlashSaleProductController = async () => {
   try {
-    const { data: product } = await getAllProducts();
-    const validProduct = getProductSchema.safeParse(product);
+    const { data: response } = await getAllProducts();
 
+    const validResponse = responseSchema.safeParse(response);
+    if (!validResponse.success) return null;
+
+    const validProduct = getProductSchema
+      .array()
+      .safeParse(validResponse.data.data);
     if (!validProduct.success) return null;
+
     return validProduct.data;
-  } catch (err) {
-    console.log("error", err);
+  } catch (_) {
     return null;
   }
 };
