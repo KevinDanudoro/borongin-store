@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Table, flexRender } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-import { Product } from "@/type/product";
+import { Product } from "@/model/product";
 
 interface CartTableProps {
   table: Table<Product>;

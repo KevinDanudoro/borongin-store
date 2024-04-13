@@ -24,7 +24,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import useSubmitProduct from "@/hooks/useSubmitProduct";
+import useSubmitProduct from "@/hooks/components/useSubmitProduct";
 import { Separator } from "@/components/ui/separator";
 
 interface ProductFormProps {}

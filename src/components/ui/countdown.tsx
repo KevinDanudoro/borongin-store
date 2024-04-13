@@ -1,6 +1,6 @@
 "use client";
 
-import useCountdown from "@/hooks/useCountdown";
+import useCountdown from "@/hooks/components/useCountdown";
 import { cn } from "@/lib/utils";
 import React from "react";
 import type { FC } from "react";

@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import PriceInput from "./PriceInput";
 import RatingCheckbox from "./RatingCheckbox";
-import useFilter from "@/hooks/useFilter";
+import useFilter from "@/hooks/components/useFilter";
 
 interface FilterSearchProps {
   trigger: React.ReactNode;

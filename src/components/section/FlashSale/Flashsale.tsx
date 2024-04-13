@@ -1,14 +1,11 @@
 import React from "react";
 import type { FC } from "react";
+import Link from "next/link";
 
 import Flag from "@/components/ui/flag";
 import Countdown from "@/components/ui/countdown";
 import Heading2 from "@/components/ui/heading2";
 import { Button } from "@/components/ui/button";
-
-import ProductCard from "@/components/implement/ProductCard/ProductCard";
-
-import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
@@ -16,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import ProductCard from "@/components/implement/ProductCard/ProductCard";
 
 interface FlashsaleProps {}
 

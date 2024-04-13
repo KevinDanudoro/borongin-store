@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import useSearchInput from "@/hooks/useSearchInput";
+import useSearchInput from "@/hooks/components/useSearchInput";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 import type { FC } from "react";

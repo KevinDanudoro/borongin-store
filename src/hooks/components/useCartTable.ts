@@ -1,12 +1,16 @@
-import { Product } from "@/type/product";
+import { productSchema } from "@/model/product";
 import {
   ColumnDef,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
+import { z } from "zod";
 
-const useCartTable = (data: Product[], columns: ColumnDef<Product>[]) => {
+const useCartTable = (
+  data: z.infer<typeof productSchema>[],
+  columns: ColumnDef<z.infer<typeof productSchema>>[]
+) => {
   const [tableData, setTableData] = useState(data);
 
   const editTableData = (product: string, quantity: number) => {

@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import useSorting from "@/hooks/useSorting";
+import useSorting from "@/hooks/components/useSorting";
 
 interface SortingSelectProps {}
 

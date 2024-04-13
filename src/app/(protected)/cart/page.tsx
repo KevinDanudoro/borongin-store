@@ -10,7 +10,7 @@ import SectionLayout from "@/components/layout/SectionLayout";
 import CartTotal from "@/components/section/CartTotal/CartTotal";
 import CartTable from "@/components/section/CartTable/CartTable";
 import Coupon from "@/components/section/Coupon/Coupon";
-import useCartTable from "@/hooks/useCartTable";
+import useCartTable from "@/hooks/components/useCartTable";
 import { columns, data } from "./table";
 
 interface PageProps {}

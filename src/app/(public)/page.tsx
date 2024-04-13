@@ -3,8 +3,8 @@ import Flashsale from "@/components/section/FlashSale";
 import Category from "@/components/section/Category";
 import BestSale from "@/components/section/BestSale/BestSale";
 import SectionLayout from "@/components/layout/SectionLayout";
-import { Separator } from "@/components/ui/separator";
 import Service from "@/components/section/Service/Service";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (

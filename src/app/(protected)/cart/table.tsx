@@ -1,10 +1,11 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Product } from "@/type/product";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { productSchema } from "@/model/product";
 
-export const data: Product[] = [
+export const data: z.infer<typeof productSchema>[] = [
   {
     name: "Motivated Chair 1",
     image: "/image/product.png",
@@ -19,7 +20,7 @@ export const data: Product[] = [
   },
 ];
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<z.infer<typeof productSchema>>[] = [
   {
     accessorKey: "product",
     header: "Product",
