@@ -1,4 +1,4 @@
-import { buyProductSchema } from "@/schema/productSchema";
+import { buyProductSchema } from "@/model/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ReadonlyURLSearchParams,

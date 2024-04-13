@@ -7,7 +7,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { signUpSchema } from "@/schema/authSchema";
 import React from "react";
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -16,15 +15,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { userSignUpSchema } from "@/model/user";
 
 interface SignUpProps {}
 
 const SignUp: FC<SignUpProps> = ({}) => {
-  const form = useForm<z.infer<typeof signUpSchema>>({
-    resolver: zodResolver(signUpSchema),
+  const form = useForm<z.infer<typeof userSignUpSchema>>({
+    resolver: zodResolver(userSignUpSchema),
   });
 
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
+  function onSubmit(values: z.infer<typeof userSignUpSchema>) {
     console.log(values);
   }
 
@@ -37,7 +37,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
-            name="name"
+            name="username"
             render={({ field }) => (
               <FormItem>
                 <FormControl>

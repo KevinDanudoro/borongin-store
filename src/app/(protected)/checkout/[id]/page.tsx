@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { FC } from "react";
+import Image from "next/image";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,11 +18,10 @@ import {
 import { Input } from "@/components/ui/input";
 import Heading2 from "@/components/ui/heading2";
 import SectionLayout from "@/components/layout/SectionLayout";
-import { checkoutSchema } from "@/schema/checkoutSchema";
-import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+import { checkoutProductSchema } from "@/model/product";
 
 interface PageProps {
   params: {
@@ -30,8 +30,8 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = ({ params }) => {
-  const form = useForm<z.infer<typeof checkoutSchema>>({
-    resolver: zodResolver(checkoutSchema),
+  const form = useForm<z.infer<typeof checkoutProductSchema>>({
+    resolver: zodResolver(checkoutProductSchema),
   });
 
   return (

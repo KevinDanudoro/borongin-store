@@ -5,7 +5,7 @@ import {
 } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { filterSchema } from "@/schema/fitlerSchema";
+import { filterProductSchema } from "@/model/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const getSearchParamsValues = (searchParams: ReadonlyURLSearchParams) => {
@@ -27,12 +27,12 @@ const useFilter = () => {
   const router = useRouter();
 
   const defaultValues = getSearchParamsValues(searchParams);
-  const form = useForm<z.infer<typeof filterSchema>>({
-    resolver: zodResolver(filterSchema),
+  const form = useForm<z.infer<typeof filterProductSchema>>({
+    resolver: zodResolver(filterProductSchema),
     defaultValues: defaultValues,
   });
 
-  const handleFormSubmit = (values: z.infer<typeof filterSchema>) => {
+  const handleFormSubmit = (values: z.infer<typeof filterProductSchema>) => {
     const params = new URLSearchParams(searchParams.toString());
     const minPrice = values.minPrice
       ? parseInt(values.minPrice.replaceAll(",", ""), 10)
