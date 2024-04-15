@@ -17,17 +17,34 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { signInUserSchema } from "@/model/user";
 import { signInUserController } from "@/controller/user";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
   });
+  const { toast } = useToast();
 
   async function onSubmit(values: z.infer<typeof signInUserSchema>) {
     const signIn = await signInUserController(values);
-    console.log({ signIn });
+    if (signIn) {
+      toast({
+        title: "Login Success",
+        description: `Hii ${signIn.username}`,
+        variant: "success",
+      });
+      router.push("/");
+    } else {
+      toast({
+        title: "Login Failed",
+        description: `Please check your credential information`,
+        variant: "destructive",
+      });
+    }
   }
 
   return (

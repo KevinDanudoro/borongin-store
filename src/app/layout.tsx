@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import QueryClientProvider from "@/components/query/QueryClientProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.className, "bg-background")}>
         <QueryClientProvider>{children}</QueryClientProvider>
+        <Toaster />
       </body>
     </html>
   );
