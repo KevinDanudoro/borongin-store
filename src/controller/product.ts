@@ -2,7 +2,7 @@ import { getProductSchema } from "@/model/product";
 import { getAllProducts } from "@/model/product/action";
 import { responseSchema } from "@/model/respone";
 
-export const getFlashSaleProductController = async () => {
+export const getFlashsaleProductsController = async () => {
   try {
     const { data: response } = await getAllProducts();
 
@@ -12,6 +12,7 @@ export const getFlashSaleProductController = async () => {
     const validProduct = getProductSchema
       .array()
       .safeParse(validResponse.data.data);
+
     if (!validProduct.success) return null;
 
     return validProduct.data;

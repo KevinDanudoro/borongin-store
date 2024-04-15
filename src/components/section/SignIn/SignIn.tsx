@@ -15,17 +15,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { userSignInSchema } from "@/model/user";
+import { signInUserSchema } from "@/model/user";
+import { signInUserController } from "@/controller/user";
 
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {
-  const form = useForm<z.infer<typeof userSignInSchema>>({
-    resolver: zodResolver(userSignInSchema),
+  const form = useForm<z.infer<typeof signInUserSchema>>({
+    resolver: zodResolver(signInUserSchema),
   });
 
-  function onSubmit(values: z.infer<typeof userSignInSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signInUserSchema>) {
+    const signIn = await signInUserController(values);
+    console.log({ signIn });
   }
 
   return (

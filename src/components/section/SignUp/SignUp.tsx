@@ -15,16 +15,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { userSignUpSchema } from "@/model/user";
+import { signUpUserSchema } from "@/model/user";
 
 interface SignUpProps {}
 
 const SignUp: FC<SignUpProps> = ({}) => {
-  const form = useForm<z.infer<typeof userSignUpSchema>>({
-    resolver: zodResolver(userSignUpSchema),
+  const form = useForm<z.infer<typeof signUpUserSchema>>({
+    resolver: zodResolver(signUpUserSchema),
   });
 
-  function onSubmit(values: z.infer<typeof userSignUpSchema>) {
+  function onSubmit(values: z.infer<typeof signUpUserSchema>) {
     console.log(values);
   }
 

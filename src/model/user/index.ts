@@ -1,6 +1,14 @@
 import { z } from "zod";
 
-export const userSignInSchema = z.object({
+export const getUserSchema = z.object({
+  username: z.string().min(1),
+  email: z.string().min(1),
+  image: z.string(),
+  cart: z.array(z.string()).nullish(),
+  wishlist: z.array(z.string()).nullish(),
+});
+
+export const signInUserSchema = z.object({
   email: z
     .string()
     .min(1, "email is required")
@@ -11,7 +19,7 @@ export const userSignInSchema = z.object({
     .max(16, "password exceed 16 character"),
 });
 
-export const userSignUpSchema = z.object({
+export const signUpUserSchema = z.object({
   username: z.string().min(1, "name is required"),
   email: z
     .string()
