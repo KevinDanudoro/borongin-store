@@ -37,7 +37,7 @@ const SignIn: FC<SignInProps> = ({}) => {
         description: `Hii ${signIn.username}`,
         variant: "success",
       });
-      router.push("/");
+      window.location.href = "/";
     } else {
       toast({
         title: "Login Failed",

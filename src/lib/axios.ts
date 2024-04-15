@@ -1,14 +1,37 @@
 import axios from "axios";
 
-const fetcher = axios.create({
-  baseURL: "http://localhost:4000",
-  // baseURL: "https://borongin.vercel.app",
-  timeout: 10000,
-  withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Credentials": true,
+const fetcher = (cookie?: string) => {
+  return typeof window === "undefined"
+    ? axios.create({
+        baseURL: "http://localhost:4000",
+        timeout: 10000,
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          Cookie: cookie,
+        },
+      })
+    : axios.create({
+        baseURL: "http://localhost:4000",
+        timeout: 10000,
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      });
+};
+
+fetcher().interceptors.response.use(
+  (res) => {
+    console.log("response", res);
+    return res;
   },
-});
+  (err) => {
+    // console.log("error", err);
+    return err;
+  }
+);
 
 export default fetcher;

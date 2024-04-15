@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import type { FC } from "react";
 
@@ -10,24 +8,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useGetFlashsaleProduct } from "@/hooks/query/flashsale";
 import ProductCard from "@/components/implement/ProductCard/ProductCard";
-import { LoaderIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getFlashsaleProductsController } from "@/controller/product";
+import cookieParser from "@/lib/cookie";
 
 interface FlashsaleListProps {}
 
-const FlashsaleList: FC<FlashsaleListProps> = ({}) => {
-  const { data: products, isLoading } = useGetFlashsaleProduct();
+const FlashsaleList: FC<FlashsaleListProps> = async ({}) => {
+  const { data: products, statusCode } = await getFlashsaleProductsController(
+    cookieParser()
+  );
 
-  if (isLoading)
-    return (
-      <div className="w-full flex flex-col items-center justify-center my-10 gap-4">
-        <LoaderIcon className="animate-spin w-10 h-10" />
-        <p>Loading Product</p>
-      </div>
-    );
+  if (statusCode !== 200) return <div>Something went wrong</div>;
 
   return products ? (
     <>
