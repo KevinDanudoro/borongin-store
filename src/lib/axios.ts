@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const fetcher = (cookie?: string) => {
   return typeof window === "undefined"
@@ -25,11 +25,11 @@ const fetcher = (cookie?: string) => {
 
 fetcher().interceptors.response.use(
   (res) => {
-    console.log("response", res);
+    console.log("response", res.data);
     return res;
   },
   (err) => {
-    // console.log("error", err);
+    if (err instanceof AxiosError) console.log("error", err.response?.data);
     return err;
   }
 );
