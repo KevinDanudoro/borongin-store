@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { FC } from "react";
 import ProductCard from "@/components/implement/ProductCard/ProductCard";
 import SectionLayout from "@/components/layout/SectionLayout";
@@ -13,15 +13,19 @@ const Page: FC<PageProps> = ({}) => {
   return (
     <main className="pt-8 pb-16">
       <SectionLayout className="flex justify-between items-center">
-        <FilterDialog
-          trigger={
-            <Button variant="outline" className="w-44" type="button">
-              Filter by
-            </Button>
-          }
-        />
+        <Suspense>
+          <FilterDialog
+            trigger={
+              <Button variant="outline" className="w-44" type="button">
+                Filter by
+              </Button>
+            }
+          />
+        </Suspense>
 
-        <SortingSelect />
+        <Suspense>
+          <SortingSelect />
+        </Suspense>
       </SectionLayout>
 
       <Separator className="h-0 my-10" />

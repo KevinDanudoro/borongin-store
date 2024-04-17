@@ -12,10 +12,11 @@ import {
 } from "@/components/ui/table";
 import { Table, flexRender } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-import { Product } from "@/model/product";
+import { productSchema } from "@/model/product";
+import { z } from "zod";
 
 interface CartTableProps {
-  table: Table<Product>;
+  table: Table<z.infer<typeof productSchema>>;
 }
 
 const CartTable: FC<CartTableProps> = ({ table }) => {
