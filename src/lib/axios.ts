@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 const fetcher = (cookie?: string) => {
   return typeof window === "undefined"
     ? axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: process.env.API_ENDPOINT,
         timeout: 10000,
         withCredentials: true,
         headers: {
@@ -13,7 +13,7 @@ const fetcher = (cookie?: string) => {
         },
       })
     : axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: process.env.API_ENDPOINT,
         timeout: 10000,
         withCredentials: true,
         headers: {
