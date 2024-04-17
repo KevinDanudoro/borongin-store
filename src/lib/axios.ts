@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const fetcher = (cookie?: string) => {
-  return typeof window === "undefined"
+  return typeof window === "undefined" && cookie
     ? axios.create({
         baseURL: process.env.API_ENDPOINT,
         timeout: 10000,

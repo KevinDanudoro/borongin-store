@@ -18,12 +18,10 @@ import Link from "next/link";
 import { signInUserSchema } from "@/model/user";
 import { signInUserController } from "@/controller/user";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
 
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {
-  const router = useRouter();
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
   });
