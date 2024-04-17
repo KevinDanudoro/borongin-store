@@ -1,3 +1,5 @@
+"use server";
+
 import { responseSchema } from "@/model/respone";
 import { getUserSchema, signInUserSchema } from "@/model/user";
 import { signInUser } from "@/model/user/action";

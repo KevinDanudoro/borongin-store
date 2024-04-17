@@ -3,10 +3,27 @@ import fetcher from "@/lib/axios";
 import { createProductSchema } from ".";
 
 export const getAllProducts = (cookie?: string) =>
-  fetcher(cookie).get("/product");
+  fetcher.get("/product", {
+    headers: {
+      Cookie: cookie,
+    },
+  });
+
 export const getProductById = (id: string, cookie?: string) =>
-  fetcher(cookie).get("/product", { params: { id } });
+  fetcher.get("/product", {
+    params: { id },
+    headers: {
+      Cookie: cookie,
+    },
+  });
+
 export const createProduct = (
   product: z.infer<typeof createProductSchema>,
   cookie?: string
-) => fetcher(cookie).post("/product", { data: product });
+) =>
+  fetcher.post("/product", {
+    data: product,
+    headers: {
+      Cookie: cookie,
+    },
+  });
