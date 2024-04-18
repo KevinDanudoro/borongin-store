@@ -7,9 +7,11 @@ import { links } from "./topbar-data";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-interface DesktopMenuProps extends React.HTMLAttributes<HTMLUListElement> {}
+interface DesktopMenuProps extends React.HTMLAttributes<HTMLUListElement> {
+  isLoggedIn: boolean;
+}
 
-const DesktopMenu: FC<DesktopMenuProps> = ({ className }) => {
+const DesktopMenu: FC<DesktopMenuProps> = ({ className, isLoggedIn }) => {
   const pathname = usePathname();
   return (
     <ul
@@ -19,6 +21,7 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ className }) => {
       )}
     >
       {links.map((link) => {
+        if (link.href === "/sign-in" && isLoggedIn) return null;
         return !link.mobileOnly ? (
           <li key={link.name}>
             <Link href={link.href}>{link.name}</Link>

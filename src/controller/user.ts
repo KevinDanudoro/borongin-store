@@ -1,5 +1,6 @@
 "use server";
 
+import getJwtSession from "@/lib/jwt";
 import { responseSchema } from "@/model/respone";
 import { getUserSchema, signInUserSchema } from "@/model/user";
 import { signInUser } from "@/model/user/action";
@@ -15,11 +16,14 @@ export const signInUserController = async (
     const authCookie = headers["set-cookie"]?.join().split(";")[0].split("=");
     if (authCookie?.length === 2 && authCookie[0] === "Authorization")
       cookies().set(authCookie[0], authCookie[1], {
-        expires: 1000 * 60 * 60,
+        maxAge: 60 * 60,
         httpOnly: true,
         sameSite: "lax",
         secure: false,
       });
+    else {
+      return null;
+    }
 
     const validResponse = responseSchema.safeParse(response);
     if (!validResponse.success) return null;
@@ -29,6 +33,16 @@ export const signInUserController = async (
 
     return validUser.data;
   } catch (error) {
+    return null;
+  }
+};
+
+export const signOutUserController = async () => {
+  try {
+    const session = await getJwtSession();
+    cookies().delete("Authorization");
+    return session;
+  } catch (err) {
     return null;
   }
 };

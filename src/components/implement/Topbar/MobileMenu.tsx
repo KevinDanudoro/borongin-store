@@ -9,9 +9,15 @@ import { Button } from "@/components/ui/button";
 import Burger from "@/components/ui/burger";
 import { usePathname } from "next/navigation";
 
-interface MobileMenuProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface MobileMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  isLoggedIn: boolean;
+}
 
-const MobileMenu: FC<MobileMenuProps> = ({ className, ...props }) => {
+const MobileMenu: FC<MobileMenuProps> = ({
+  className,
+  isLoggedIn,
+  ...props
+}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   return (
@@ -33,6 +39,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ className, ...props }) => {
       >
         {links.map((link) => {
           const Icon = link.icon;
+          if (link.href === "/sign-in" && isLoggedIn) return null;
           return link.href !== "/sign-in" ? (
             <Link
               href={link.href}

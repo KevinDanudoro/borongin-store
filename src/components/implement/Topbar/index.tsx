@@ -2,10 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import Topbar from "./Topbar";
 
-export interface TopbarProps {
-  isAuth?: boolean;
-  isInAuthPage?: boolean;
-}
+export interface TopbarProps {}
 
 const Index: FC<TopbarProps> = (props) => {
   return <Topbar {...props} />;

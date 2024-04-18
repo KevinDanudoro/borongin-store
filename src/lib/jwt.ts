@@ -1,3 +1,5 @@
+"use server";
+
 import { jwtVerify } from "jose";
 import { userSessionSchema } from "@/model/user";
 import { cookies } from "next/headers";

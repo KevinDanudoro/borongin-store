@@ -4,27 +4,27 @@ const data = [
   {
     icon: User,
     title: "Account",
-    href: "account",
+    href: "/account",
   },
   {
     icon: ShoppingBag,
     title: "Order",
-    href: "order",
+    href: "/order",
   },
   {
     icon: XCircle,
     title: "Cancellation",
-    href: "cancellation",
+    href: "/cancellation",
   },
   {
     icon: Star,
     title: "Reviews",
-    href: "reviews",
+    href: "/reviews",
   },
   {
     icon: LogOut,
     title: "Sign Out",
-    href: "sign-in",
+    href: "/sign-in",
   },
 ];
 
