@@ -18,6 +18,7 @@ import Link from "next/link";
 import { signInUserSchema } from "@/model/user";
 import { signInUserController } from "@/controller/user";
 import { useToast } from "@/components/ui/use-toast";
+import { useSearchParams } from "next/navigation";
 
 interface SignInProps {}
 
@@ -25,6 +26,7 @@ const SignIn: FC<SignInProps> = ({}) => {
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
   });
+  const searchParams = useSearchParams();
   const { toast } = useToast();
 
   async function onSubmit(values: z.infer<typeof signInUserSchema>) {
@@ -35,7 +37,7 @@ const SignIn: FC<SignInProps> = ({}) => {
         description: `Hii ${signIn.username}`,
         variant: "success",
       });
-      window.location.href = "/";
+      window.location.href = searchParams.get("callback") ?? "/";
     } else {
       toast({
         title: "Login Failed",
