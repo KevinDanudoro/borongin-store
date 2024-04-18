@@ -9,7 +9,7 @@ interface LayoutProps extends PropsWithChildren {}
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Topbar isInAuthPage={true} />
+      <Topbar />
       <AuthLayout>{children}</AuthLayout>
       <Footer />
     </>
