@@ -19,9 +19,7 @@ import FlashsaleListEmpty from "./FlashsaleListEmpty";
 interface FlashsaleListProps {}
 
 const FlashsaleList: FC<FlashsaleListProps> = async ({}) => {
-  const { data: products, statusCode } = await getFlashsaleProductsController(
-    cookieParser()
-  );
+  const { data: products, statusCode } = await getFlashsaleProductsController();
 
   if (statusCode !== 200) return <FlashsaleListError />;
 

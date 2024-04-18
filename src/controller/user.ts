@@ -16,7 +16,6 @@ export const signInUserController = async (
     if (authCookie?.length === 2 && authCookie[0] === "Authorization")
       cookies().set(authCookie[0], authCookie[1], {
         expires: 1000 * 60 * 60,
-        maxAge: 1000 * 60 * 60,
         httpOnly: true,
         sameSite: "lax",
         secure: false,

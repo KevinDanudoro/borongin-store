@@ -30,3 +30,11 @@ export const signUpUserSchema = z.object({
     .min(1, "password is required")
     .max(16, "password exceed 16 character"),
 });
+
+export const userSessionSchema = z.object({
+  id: z.string().min(1),
+  username: z.string().min(1),
+  email: z.string().email().min(1),
+  iat: z.number(),
+  exp: z.number(),
+});

@@ -4,9 +4,9 @@ import { getAllProducts } from "@/model/product/action";
 import { responseSchema } from "@/model/respone";
 import { AxiosError } from "axios";
 
-export const getFlashsaleProductsController = async (cookie?: string) => {
+export const getFlashsaleProductsController = async () => {
   try {
-    const response = await getAllProducts(cookie);
+    const response = await getAllProducts();
     if (response instanceof AxiosError) throw response;
 
     const validResponse = responseSchema.safeParse(response.data);
