@@ -46,15 +46,6 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
       )
     : filteredProductsByPrice;
 
-  console.log({
-    searchProducts,
-    filteredProductByRating,
-    filteredProductsByPrice,
-    priceRange,
-    rating,
-  });
-
-  // TODO: 2. Implementasi wishlist dan cart
   return (
     <main className="pt-8 pb-16">
       <SectionLayout className="flex justify-between items-center">
