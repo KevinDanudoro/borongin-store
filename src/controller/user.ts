@@ -17,14 +17,14 @@ export const signUpUserController = async (
   user: z.infer<typeof signUpUserSchema>
 ) => {
   try {
-    const { data: response } = await signUpUser(user);
+    const { data: response, status, statusText } = await signUpUser(user);
 
     const validResponse = responseSchema.safeParse(response);
     if (!validResponse.success)
       return controllerWrapper({
         data: null,
-        statusCode: 400,
-        message: "Bad user request",
+        statusCode: status,
+        message: statusText,
       });
 
     const validUser = getUserSchema.safeParse(validResponse.data.data);

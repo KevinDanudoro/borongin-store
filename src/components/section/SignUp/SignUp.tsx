@@ -23,9 +23,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 interface SignUpProps {}
 
 const SignUp: FC<SignUpProps> = ({}) => {
-  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof signUpUserSchema>>({
@@ -36,14 +37,15 @@ const SignUp: FC<SignUpProps> = ({}) => {
     setIsLoading(true);
     const { statusCode, message } = await signUpUserController(values);
     setIsLoading(false);
-    if (statusCode !== 201)
+
+    if (statusCode === 201)
+      router.replace("/sign-in?" + searchParams.toString());
+    else {
       toast({
         variant: "destructive",
         title: "Failed to register user",
         description: message,
       });
-    else {
-      router.replace("/sign-in?" + searchParams.toString());
     }
   }
 

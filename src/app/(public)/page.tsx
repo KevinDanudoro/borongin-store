@@ -6,7 +6,7 @@ import SectionLayout from "@/components/layout/SectionLayout";
 import Service from "@/components/section/Service/Service";
 import { Separator } from "@/components/ui/separator";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="py-10">
       <SectionLayout>
