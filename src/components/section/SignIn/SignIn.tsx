@@ -37,6 +37,11 @@ const SignIn: FC<SignInProps> = ({}) => {
     const { statusCode, message } = await signInUserController(values);
     setIsLoading(false);
     if (statusCode === 200) {
+      toast({
+        title: "Login Success",
+        description: message,
+        variant: "success",
+      });
       router.push(searchParams.get("callback") ?? "/");
       router.refresh();
     } else {
