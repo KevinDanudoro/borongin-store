@@ -1,9 +1,10 @@
 "use server";
 
+import cookieParser from "@/lib/cookie";
 import getJwtSession from "@/lib/jwt";
 import { responseSchema } from "@/model/respone";
 import { getUserSchema, signInUserSchema } from "@/model/user";
-import { signInUser } from "@/model/user/action";
+import { addUserCart, signInUser } from "@/model/user/action";
 import { cookies } from "next/headers";
 import { z } from "zod";
 
@@ -42,6 +43,17 @@ export const signOutUserController = async () => {
     const session = await getJwtSession();
     cookies().delete("Authorization");
     return session;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const addUserCartController = async (productId: string) => {
+  try {
+    const cookie = cookieParser();
+    const userCart = await addUserCart(productId, cookie);
+    if (!userCart.data) return null;
+    return userCart.data;
   } catch (err) {
     return null;
   }

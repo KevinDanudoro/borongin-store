@@ -22,6 +22,7 @@ const Page: FC<PageProps> = ({}) => {
         <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-4 gap-y-8 mb-20">
           {Array.from({ length: 10 }).map((_, i) => (
             <ProductCard
+              id={"1"}
               key={i}
               name="Gucci duffle bag"
               imageSrc="/image/product.png"

@@ -12,7 +12,6 @@ import {
 import ProductCard from "@/components/implement/ProductCard/ProductCard";
 import { Button } from "@/components/ui/button";
 import { getFlashsaleProductsController } from "@/controller/product";
-import cookieParser from "@/lib/cookie";
 import FlashsaleListError from "./FlashsaleListError";
 import FlashsaleListEmpty from "./FlashsaleListEmpty";
 
@@ -33,6 +32,7 @@ const FlashsaleList: FC<FlashsaleListProps> = async ({}) => {
               key={i}
             >
               <ProductCard
+                id={product._id}
                 name={product.name}
                 price={product.price}
                 discount={0.05 * (i + 1)}

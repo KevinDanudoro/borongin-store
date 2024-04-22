@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import type { FC } from "react";
 import Image from "next/image";
 import { Eye, Heart, ShoppingCart } from "lucide-react";
@@ -7,8 +9,11 @@ import Rating from "@/components/ui/rating";
 import { ProductCardProps } from ".";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { addUserCartController } from "@/controller/user";
+import { useToast } from "@/components/ui/use-toast";
 
 const ProductCard: FC<ProductCardProps> = ({
+  id,
   name,
   imageSrc,
   price,
@@ -18,7 +23,27 @@ const ProductCard: FC<ProductCardProps> = ({
   className,
   ...props
 }) => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const discountPrice = discount ? price - Math.ceil(price * discount) : 0;
+
+  const handleOnAddCartClick = async () => {
+    setIsLoading(true);
+    const user = await addUserCartController(id);
+    setIsLoading(false);
+    if (!user)
+      toast({
+        variant: "destructive",
+        title: "Failed adding product to cart",
+        description: "Please try again later.",
+      });
+    else
+      toast({
+        variant: "success",
+        title: "Success adding product to cart",
+        description: "Let check your cart",
+      });
+  };
 
   return (
     <div className={cn("space-y-2 group/container", className)} {...props}>
@@ -67,9 +92,13 @@ const ProductCard: FC<ProductCardProps> = ({
           </Button>
         </div>
 
-        <span className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer">
+        <button
+          className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer w-full disabled:bg-secondary disabled:hover:bg-secondary disabled:text-secondary-foreground disabled:hover:text-secondary-foreground disabled:cursor-wait"
+          onClick={() => handleOnAddCartClick()}
+          disabled={isLoading}
+        >
           <ShoppingCart /> Add To Cart
-        </span>
+        </button>
       </div>
 
       <Link href={"/product/1"} className="block space-y-2">

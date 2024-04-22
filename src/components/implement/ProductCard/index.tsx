@@ -4,6 +4,7 @@ import React from "react";
 import type { FC } from "react";
 
 export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  id: string;
   name: string;
   imageSrc: string;
   price: number;

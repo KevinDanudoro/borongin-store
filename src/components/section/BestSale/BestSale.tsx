@@ -19,6 +19,7 @@ const BestSale: FC<BestSaleProps> = ({}) => {
       <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-x-4 gap-y-8 md:flex flex-row justify-between">
         {Array.from({ length: 4 }).map((_, i) => (
           <ProductCard
+            id={"1"}
             key={i}
             name="S Series Chair"
             price={100000 * (i + 1)}

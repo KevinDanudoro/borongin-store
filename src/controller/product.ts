@@ -1,3 +1,5 @@
+"use server";
+
 import { controllerWrapper } from "@/lib/wrapper";
 import { getProductSchema } from "@/model/product";
 import { getAllProducts } from "@/model/product/action";

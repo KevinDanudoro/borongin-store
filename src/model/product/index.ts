@@ -16,6 +16,7 @@ export const createProductSchema = z.object({
 });
 
 export const getProductSchema = z.object({
+  _id: z.string().min(1),
   name: z.string().min(1),
   desc: z.string().min(1),
   imageUrl: z.array(z.string().min(1)),

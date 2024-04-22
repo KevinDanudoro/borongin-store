@@ -70,6 +70,7 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
         <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-x-4 gap-y-8">
           {filteredProductByRating?.map((product, i) => (
             <ProductCard
+              id={"i"}
               key={i}
               name={product.name}
               imageSrc={product.imageUrl[0]}

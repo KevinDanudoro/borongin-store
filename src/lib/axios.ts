@@ -16,7 +16,7 @@ fetcher.interceptors.response.use(
     return res;
   },
   (err) => {
-    if (err instanceof AxiosError) console.log("error", err.response?.data);
+    if (err instanceof AxiosError) console.log("error", err.request);
     return err;
   }
 );
