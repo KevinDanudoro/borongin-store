@@ -13,20 +13,24 @@ import { cn } from "@/lib/utils";
 import data from "./avatarmenu-data";
 import { signOutUserController } from "@/controller/user";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 interface AvatarMenuProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const AvatarMenu: FC<AvatarMenuProps> = ({ className, ...props }) => {
+  const router = useRouter();
   const { toast } = useToast();
+
   const handleSignOut = async () => {
-    const signOutedUser = await signOutUserController();
-    if (signOutedUser !== null) {
+    const { statusCode } = await signOutUserController();
+    if (statusCode === 200) {
       toast({
         title: "Success to sign out",
-        description: `Goodbye ${signOutedUser.username}`,
+        description: `Goodbye, see you next time`,
         variant: "success",
       });
-      window.location.href = "/sign-in";
+      router.push("/sign-in");
+      router.refresh();
     } else {
       toast({
         title: "Failed to sign out",

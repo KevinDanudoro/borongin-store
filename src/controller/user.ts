@@ -1,12 +1,60 @@
 "use server";
 
 import cookieParser from "@/lib/cookie";
-import getJwtSession from "@/lib/jwt";
+import { controllerWrapper } from "@/lib/wrapper";
 import { responseSchema } from "@/model/respone";
-import { getUserSchema, signInUserSchema } from "@/model/user";
-import { addUserCart, signInUser } from "@/model/user/action";
+import {
+  getUserSchema,
+  signInUserSchema,
+  signUpUserSchema,
+} from "@/model/user";
+import { addUserCart, signInUser, signUpUser } from "@/model/user/action";
+import { AxiosError } from "axios";
 import { cookies } from "next/headers";
 import { z } from "zod";
+
+export const signUpUserController = async (
+  user: z.infer<typeof signUpUserSchema>
+) => {
+  try {
+    const { data: response } = await signUpUser(user);
+
+    const validResponse = responseSchema.safeParse(response);
+    if (!validResponse.success)
+      return controllerWrapper({
+        data: null,
+        statusCode: 400,
+        message: "Bad user request",
+      });
+
+    const validUser = getUserSchema.safeParse(validResponse.data.data);
+    if (!validUser.success)
+      return controllerWrapper({
+        data: null,
+        statusCode: 400,
+        message: validResponse.data.message,
+      });
+
+    return controllerWrapper({
+      data: validUser.data,
+      statusCode: validResponse.data.statusCode,
+      message: validResponse.data.message,
+    });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return controllerWrapper({
+        data: null,
+        statusCode: error.response?.data.statusCode || 500,
+        message: error.response?.data.message || "Something went wrong",
+      });
+    }
+    return controllerWrapper({
+      data: null,
+      statusCode: 500,
+      message: "Something went wrong",
+    });
+  }
+};
 
 export const signInUserController = async (
   user: z.infer<typeof signInUserSchema>
@@ -23,28 +71,57 @@ export const signInUserController = async (
         secure: false,
       });
     else {
-      return null;
+      return controllerWrapper({
+        data: null,
+        statusCode: 500,
+        message: "Failed to attach cookies",
+      });
     }
 
     const validResponse = responseSchema.safeParse(response);
-    if (!validResponse.success) return null;
+    if (!validResponse.success)
+      return controllerWrapper({
+        data: null,
+        statusCode: 400,
+        message: "Bad server response",
+      });
 
     const validUser = getUserSchema.safeParse(validResponse.data.data);
-    if (!validUser.success) return null;
+    if (!validUser.success)
+      return controllerWrapper({
+        data: null,
+        statusCode: 400,
+        message: "Bad user schema response",
+      });
 
-    return validUser.data;
+    return controllerWrapper({
+      data: validUser.data,
+      statusCode: 200,
+      message: validResponse.data.message,
+    });
   } catch (error) {
-    return null;
+    return controllerWrapper({
+      data: null,
+      statusCode: 500,
+      message: "Something went wrong",
+    });
   }
 };
 
 export const signOutUserController = async () => {
   try {
-    const session = await getJwtSession();
     cookies().delete("Authorization");
-    return session;
+    return controllerWrapper({
+      data: null,
+      statusCode: 200,
+      message: "Success to sign out",
+    });
   } catch (err) {
-    return null;
+    return controllerWrapper({
+      data: null,
+      statusCode: 500,
+      message: "Failed to sign out",
+    });
   }
 };
 

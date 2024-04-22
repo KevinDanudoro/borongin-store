@@ -7,7 +7,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import React from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,16 +16,35 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { signUpUserSchema } from "@/model/user";
+import { signUpUserController } from "@/controller/user";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface SignUpProps {}
 
 const SignUp: FC<SignUpProps> = ({}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof signUpUserSchema>>({
     resolver: zodResolver(signUpUserSchema),
   });
 
-  function onSubmit(values: z.infer<typeof signUpUserSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signUpUserSchema>) {
+    setIsLoading(true);
+    const { statusCode, message } = await signUpUserController(values);
+    setIsLoading(false);
+    if (statusCode !== 201)
+      toast({
+        variant: "destructive",
+        title: "Failed to register user",
+        description: message,
+      });
+    else {
+      router.replace("/sign-in?" + searchParams.toString());
+    }
   }
 
   return (
@@ -86,7 +105,7 @@ const SignUp: FC<SignUpProps> = ({}) => {
               </FormItem>
             )}
           />
-          <Button className="w-full py-4" type="submit">
+          <Button className="w-full py-4" type="submit" disabled={isLoading}>
             Sign Up
           </Button>
           <Button

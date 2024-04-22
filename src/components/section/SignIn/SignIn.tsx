@@ -7,7 +7,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import React from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,30 +18,31 @@ import Link from "next/link";
 import { signInUserSchema } from "@/model/user";
 import { signInUserController } from "@/controller/user";
 import { useToast } from "@/components/ui/use-toast";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
   });
-  const searchParams = useSearchParams();
-  const { toast } = useToast();
 
   async function onSubmit(values: z.infer<typeof signInUserSchema>) {
-    const signIn = await signInUserController(values);
-    if (signIn) {
-      toast({
-        title: "Login Success",
-        description: `Hii ${signIn.username}`,
-        variant: "success",
-      });
-      window.location.href = searchParams.get("callback") ?? "/";
+    setIsLoading(true);
+    const { statusCode, message } = await signInUserController(values);
+    setIsLoading(false);
+    if (statusCode === 200) {
+      router.push(searchParams.get("callback") ?? "/");
+      router.refresh();
     } else {
       toast({
         title: "Login Failed",
-        description: `Please check your credential information`,
+        description: message,
         variant: "destructive",
       });
     }
@@ -90,7 +91,12 @@ const SignIn: FC<SignInProps> = ({}) => {
           />
 
           <div className="flex justify-between items-center">
-            <Button className="px-6 py-1 flex-1 max-w-32" type="submit">
+            <Button
+              className="px-6 py-1 flex-1 max-w-32"
+              type="submit"
+              disabled={isLoading}
+              variant={isLoading ? "ghost" : "default"}
+            >
               Sign In
             </Button>
 
@@ -102,7 +108,9 @@ const SignIn: FC<SignInProps> = ({}) => {
           <p className="text-center text-sm">
             {"Don't have an account?"}{" "}
             <Link
-              href={"/sign-up"}
+              href={`/sign-up${
+                searchParams ? "?" + searchParams.toString() : ""
+              }`}
               className="text-foreground border-b border-b-foreground pb-1 ml-4 hover:border-b-primary hover:border-b-4 hover:font-bold transition-all"
             >
               Sign Up

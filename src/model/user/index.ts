@@ -3,9 +3,9 @@ import { z } from "zod";
 export const getUserSchema = z.object({
   username: z.string().min(1),
   email: z.string().min(1),
-  image: z.string(),
-  cart: z.array(z.string()).nullish(),
-  wishlist: z.array(z.string()).nullish(),
+  image: z.string().nullish(),
+  cart: z.array(z.object({})).nullish(),
+  wishlist: z.array(z.object({})).nullish(),
 });
 
 export const signInUserSchema = z.object({
