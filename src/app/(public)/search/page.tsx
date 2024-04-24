@@ -49,19 +49,15 @@ const Page: FC<PageProps> = async ({ searchParams }) => {
   return (
     <main className="pt-8 pb-16">
       <SectionLayout className="flex justify-between items-center">
-        <Suspense>
-          <FilterDialog
-            trigger={
-              <Button variant="outline" className="w-44" type="button">
-                Filter by
-              </Button>
-            }
-          />
-        </Suspense>
+        <FilterDialog
+          trigger={
+            <Button variant="outline" className="w-44" type="button">
+              Filter by
+            </Button>
+          }
+        />
 
-        <Suspense>
-          <SortingSelect />
-        </Suspense>
+        <SortingSelect />
       </SectionLayout>
 
       <Separator className="h-0 my-10" />
