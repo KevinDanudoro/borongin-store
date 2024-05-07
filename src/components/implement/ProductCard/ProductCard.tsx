@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import type { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { Eye, Heart, ShoppingCart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Rating from "@/components/ui/rating";
-import { addCartController } from "@/controller/cart";
-import { useToast } from "@/components/ui/use-toast";
+import { useWishlistCard } from "@/hooks/components/useWishlistCard";
+import { useCartCard } from "@/hooks/components/useCartCard";
 import { cn } from "@/lib/utils";
 import { ProductCardProps } from ".";
-import { addWishlistController } from "@/controller/wishlist";
 
 const ProductCard: FC<ProductCardProps> = ({
   id,
@@ -21,50 +21,18 @@ const ProductCard: FC<ProductCardProps> = ({
   price,
   discount,
   rating,
-  isWishlist,
   className,
+  isWishlist,
+  isCart,
   ...props
 }) => {
-  const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { optWishlist, handleOnWishlistClick } = useWishlistCard(
+    id,
+    isWishlist ?? false
+  );
+  const { optCart, handleOnCartClick } = useCartCard(id, isCart ?? false);
+
   const discountPrice = discount ? price - Math.ceil(price * discount) : 0;
-
-  const handleOnCartClick = async () => {
-    setIsLoading(true);
-    const cart = await addCartController(id);
-    setIsLoading(false);
-    if (!cart)
-      toast({
-        variant: "destructive",
-        title: "Failed adding product to cart",
-        description: "Please try again later.",
-      });
-    else
-      toast({
-        variant: "success",
-        title: "Success adding product to cart",
-        description: "Let check your cart",
-      });
-  };
-
-  const handleOnWishlistClick = async () => {
-    setIsLoading(true);
-    const wishlist = await addWishlistController(id);
-    setIsLoading(false);
-
-    if (!wishlist)
-      toast({
-        variant: "destructive",
-        title: "Failed adding product to wishlist",
-        description: "Please try again later.",
-      });
-    else
-      toast({
-        variant: "success",
-        title: "Success adding product to wishlist",
-        description: "Let check your wishlist",
-      });
-  };
 
   return (
     <div className={cn("space-y-2 group/container", className)} {...props}>
@@ -84,7 +52,7 @@ const ProductCard: FC<ProductCardProps> = ({
           </small>
         )}
         <div className="absolute top-3 right-3 flex flex-col gap-3">
-          {isWishlist !== undefined && (
+          {optWishlist !== undefined && (
             <Button
               size="icon"
               variant="link"
@@ -94,9 +62,8 @@ const ProductCard: FC<ProductCardProps> = ({
               <Heart
                 size={18}
                 className={cn({
-                  "fill-white group-hover:fill-red-500 stroke-red-500 transition-colors":
-                    true,
-                  "fill-red-500 stroke-red-500": isWishlist === true,
+                  "fill-white stroke-red-500 transition-colors": true,
+                  "fill-red-500 stroke-red-500": optWishlist === true,
                 })}
               />
             </Button>
@@ -115,11 +82,18 @@ const ProductCard: FC<ProductCardProps> = ({
         </div>
 
         <button
-          className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer w-full disabled:bg-secondary disabled:hover:bg-secondary disabled:text-secondary-foreground disabled:hover:text-secondary-foreground disabled:cursor-wait"
+          className={cn({
+            "absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer w-full":
+              true,
+            "disabled:bg-secondary disabled:hover:bg-secondary disabled:text-secondary-foreground disabled:hover:text-secondary-foreground disabled:cursor-wait":
+              !optCart,
+            "bg-primary text-primary-foreground disabled:cursor-not-allowed":
+              optCart,
+          })}
           onClick={() => handleOnCartClick()}
-          disabled={isLoading}
+          disabled={optCart}
         >
-          <ShoppingCart /> Add To Cart
+          <ShoppingCart /> {optCart ? "Already in Cart" : "Add To Cart"}
         </button>
       </div>
 
