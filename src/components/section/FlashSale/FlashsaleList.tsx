@@ -38,7 +38,8 @@ const FlashsaleList: FC<FlashsaleListProps> = async ({}) => {
                 discount={0.05 * (i + 1)}
                 imageSrc={product.imageUrl[0]}
                 rating={product.rating}
-                isWishlist={false}
+                isWishlist={product.isWishlist ?? false}
+                isCart={product.isCart ?? false}
               />
             </CarouselItem>
           ))}

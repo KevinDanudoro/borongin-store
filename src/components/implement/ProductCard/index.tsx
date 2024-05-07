@@ -11,6 +11,7 @@ export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   discount?: number;
   rating: number;
   isWishlist?: boolean;
+  isCart?: boolean;
 }
 
 const Index: FC<ProductCardProps> = (props) => {

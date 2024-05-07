@@ -3,14 +3,16 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Eye, Heart, ShoppingCart } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import Rating from "@/components/ui/rating";
-import { ProductCardProps } from ".";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { addUserCartController } from "@/controller/user";
+import { addCartController } from "@/controller/cart";
 import { useToast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { ProductCardProps } from ".";
+import { addWishlistController } from "@/controller/wishlist";
 
 const ProductCard: FC<ProductCardProps> = ({
   id,
@@ -27,11 +29,11 @@ const ProductCard: FC<ProductCardProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const discountPrice = discount ? price - Math.ceil(price * discount) : 0;
 
-  const handleOnAddCartClick = async () => {
+  const handleOnCartClick = async () => {
     setIsLoading(true);
-    const user = await addUserCartController(id);
+    const cart = await addCartController(id);
     setIsLoading(false);
-    if (!user)
+    if (!cart)
       toast({
         variant: "destructive",
         title: "Failed adding product to cart",
@@ -42,6 +44,25 @@ const ProductCard: FC<ProductCardProps> = ({
         variant: "success",
         title: "Success adding product to cart",
         description: "Let check your cart",
+      });
+  };
+
+  const handleOnWishlistClick = async () => {
+    setIsLoading(true);
+    const wishlist = await addWishlistController(id);
+    setIsLoading(false);
+
+    if (!wishlist)
+      toast({
+        variant: "destructive",
+        title: "Failed adding product to wishlist",
+        description: "Please try again later.",
+      });
+    else
+      toast({
+        variant: "success",
+        title: "Success adding product to wishlist",
+        description: "Let check your wishlist",
       });
   };
 
@@ -68,6 +89,7 @@ const ProductCard: FC<ProductCardProps> = ({
               size="icon"
               variant="link"
               className="bg-background text-foreground rounded-full w-fit h-fit p-2 group"
+              onClick={handleOnWishlistClick}
             >
               <Heart
                 size={18}
@@ -94,7 +116,7 @@ const ProductCard: FC<ProductCardProps> = ({
 
         <button
           className="absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer w-full disabled:bg-secondary disabled:hover:bg-secondary disabled:text-secondary-foreground disabled:hover:text-secondary-foreground disabled:cursor-wait"
-          onClick={() => handleOnAddCartClick()}
+          onClick={() => handleOnCartClick()}
           disabled={isLoading}
         >
           <ShoppingCart /> Add To Cart

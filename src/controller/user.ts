@@ -1,6 +1,5 @@
 "use server";
 
-import cookieParser from "@/lib/cookie";
 import { controllerWrapper } from "@/lib/wrapper";
 import { responseSchema } from "@/model/respone";
 import {
@@ -8,7 +7,7 @@ import {
   signInUserSchema,
   signUpUserSchema,
 } from "@/model/user";
-import { addUserCart, signInUser, signUpUser } from "@/model/user/action";
+import { signInUser, signUpUser } from "@/model/user/action";
 import { AxiosError } from "axios";
 import { cookies } from "next/headers";
 import { z } from "zod";
@@ -122,16 +121,5 @@ export const signOutUserController = async () => {
       statusCode: 500,
       message: "Failed to sign out",
     });
-  }
-};
-
-export const addUserCartController = async (productId: string) => {
-  try {
-    const cookie = cookieParser();
-    const userCart = await addUserCart(productId, cookie);
-    if (!userCart.data) return null;
-    return userCart.data;
-  } catch (err) {
-    return null;
   }
 };

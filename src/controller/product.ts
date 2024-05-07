@@ -1,5 +1,6 @@
 "use server";
 
+import cookieParser from "@/lib/cookie";
 import { controllerWrapper } from "@/lib/wrapper";
 import { getProductSchema } from "@/model/product";
 import { getAllProducts } from "@/model/product/action";
@@ -8,7 +9,7 @@ import { AxiosError } from "axios";
 
 export const getFlashsaleProductsController = async () => {
   try {
-    const response = await getAllProducts();
+    const response = await getAllProducts(cookieParser());
     if (response instanceof AxiosError) throw response;
 
     const validResponse = responseSchema.safeParse(response.data);

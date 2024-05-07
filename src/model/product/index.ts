@@ -23,6 +23,8 @@ export const getProductSchema = z.object({
   price: z.coerce.number().min(0),
   rating: z.number().min(0),
   sold: z.number().min(0),
+  isCart: z.boolean().nullish(),
+  isWishlist: z.boolean().nullish(),
 });
 
 export const buyProductSchema = z.object({
