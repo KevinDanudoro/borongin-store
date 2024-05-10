@@ -9,9 +9,9 @@ import { Eye, Heart, ShoppingCart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Rating from "@/components/ui/rating";
-import { useWishlistCard } from "@/hooks/components/useWishlistCard";
-import { useCartCard } from "@/hooks/components/useCartCard";
 import { cn } from "@/lib/utils";
+import { useCartCard } from "@/hooks/components/useCartCard";
+import { useWishlistCard } from "@/hooks/components/useWishlistCard";
 import { ProductCardProps } from ".";
 
 const ProductCard: FC<ProductCardProps> = ({

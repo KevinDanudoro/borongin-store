@@ -2,8 +2,8 @@ import z from "zod";
 import fetcher from "@/lib/axios";
 import { createProductSchema } from ".";
 
-export const getAllProducts = (cookie?: string) =>
-  fetcher.get("/product", cookie ? { headers: { Cookie: cookie } } : {});
+export const getAllProducts = (Cookie?: string) =>
+  fetcher.get("/product", Cookie ? { headers: { Cookie } } : {});
 
 export const getProductById = (id: string) =>
   fetcher.get("/product", {

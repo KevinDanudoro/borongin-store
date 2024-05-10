@@ -3,11 +3,12 @@ import {
   addWishlistController,
   removeWishlistController,
 } from "@/controller/wishlist";
+import { useQueryClient } from "@tanstack/react-query";
 import { useOptimistic, useState } from "react";
 
 export const useWishlistCard = (productId: string, isWishlisted: boolean) => {
   const { toast } = useToast();
-
+  const queryClient = useQueryClient();
   const [wishlist, setWishlist] = useState(isWishlisted);
   const [optWishlist, setOptWishlist] = useOptimistic(wishlist);
 
@@ -32,6 +33,7 @@ export const useWishlistCard = (productId: string, isWishlisted: boolean) => {
       });
     else if (response.statusCode === 200 && !wishlist) {
       setWishlist((prev) => !prev);
+      queryClient.invalidateQueries({ queryKey: ["wishlist"] });
       toast({
         variant: "success",
         title: "Success adding product to wishlist",
@@ -39,6 +41,7 @@ export const useWishlistCard = (productId: string, isWishlisted: boolean) => {
       });
     } else if (response.statusCode === 200 && wishlist) {
       setWishlist((prev) => !prev);
+      queryClient.invalidateQueries({ queryKey: ["wishlist"] });
       toast({
         variant: "success",
         title: "Success remove product from wishlist",

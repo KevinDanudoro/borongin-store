@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import ReduxProvider from "@/components/provider/ReduxProvider";
+import QueryProvider from "@/components/provider/QueryProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,10 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(poppins.className, "bg-background")}>
-        <ReduxProvider>
-          {children}
-          <Toaster />
-        </ReduxProvider>
+        <QueryProvider>
+          <ReduxProvider>
+            {children}
+            <Toaster />
+          </ReduxProvider>
+        </QueryProvider>
       </body>
     </html>
   );
