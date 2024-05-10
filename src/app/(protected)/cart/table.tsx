@@ -1,26 +1,11 @@
-import { ColumnDef } from "@tanstack/react-table";
-
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
+import { ColumnDef } from "@tanstack/react-table";
 import { z } from "zod";
-import { productSchema } from "@/model/product";
 
-export const data: z.infer<typeof productSchema>[] = [
-  {
-    name: "Motivated Chair 1",
-    image: "/image/product.png",
-    price: 1000000,
-    quantity: 2,
-  },
-  {
-    name: "Motivated Chair 2",
-    image: "/image/product.png",
-    price: 1500000,
-    quantity: 4,
-  },
-];
+import { Input } from "@/components/ui/input";
+import { tableCartSchema } from "@/model/cart";
 
-export const columns: ColumnDef<z.infer<typeof productSchema>>[] = [
+export const columns: ColumnDef<z.infer<typeof tableCartSchema>>[] = [
   {
     accessorKey: "product",
     header: "Product",
@@ -50,7 +35,7 @@ export const columns: ColumnDef<z.infer<typeof productSchema>>[] = [
         className="w-20"
         onChange={(e) => {
           table.options.meta?.editTableData(
-            row.original.name,
+            row.original._id,
             parseInt(e.target.value)
           );
         }}

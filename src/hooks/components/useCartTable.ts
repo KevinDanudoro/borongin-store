@@ -1,26 +1,32 @@
-import { productSchema } from "@/model/product";
+import { tableCartSchema } from "@/model/cart";
 import {
   ColumnDef,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 
 const useCartTable = (
-  data: z.infer<typeof productSchema>[],
-  columns: ColumnDef<z.infer<typeof productSchema>>[]
+  data: z.infer<typeof tableCartSchema>[],
+  columns: ColumnDef<z.infer<typeof tableCartSchema>>[]
 ) => {
   const [tableData, setTableData] = useState(data);
+  useEffect(() => {
+    if (data.length > 0) setTableData(data);
+  }, [data]);
 
-  const editTableData = (product: string, quantity: number) => {
+  const editTableData = (productId: string, quantity: number) => {
     setTableData((prev) => {
       if (quantity === 0) {
-        const updatedTable = prev.filter((value) => value.name !== product);
+        const updatedTable = prev.filter((value) => value._id !== productId);
         return updatedTable;
       }
 
-      const index = prev.findIndex((value) => value.name === product);
+      // TODO: Hubungkan ke api untuk mengurangi kuantitas produk pada cart
+      console.log({ quantity, productId });
+
+      const index = prev.findIndex((value) => value._id === productId);
       const updatedTable = prev;
       updatedTable[index].quantity = quantity;
       return [...updatedTable];
