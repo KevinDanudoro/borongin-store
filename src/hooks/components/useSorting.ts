@@ -6,7 +6,7 @@ const useSorting = () => {
 
   const onSortingChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", value);
+    params.set("sorting", value);
     router.push(`/search?${params}`);
   };
 
