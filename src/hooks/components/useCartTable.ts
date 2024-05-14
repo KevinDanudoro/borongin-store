@@ -21,23 +21,27 @@ const useCartTable = (
     if (data.length > 0) setTableData(data);
   }, [data]);
 
-  const setTableDataQuantity = (productId: string, quantity: number) => {
+  const setTableDataQuantity = async (productId: string, quantity: number) => {
     setTableData((prevData) =>
       prevData.map((prev) =>
         prev._id === productId ? { ...prev, quantity } : { ...prev }
       )
     );
   };
-  const syncTableData = useDebouncedCallback(
-    async (productId: string, quantity: number) => {
-      const cart =
-        quantity > 0
-          ? await setCartQuantityController(productId, quantity)
-          : await removeCartController(productId);
+  const syncTableData = useDebouncedCallback(async () => {
+    const cartsPromise = tableData.map((data) =>
+      data.quantity > 0
+        ? setCartQuantityController(data._id, data.quantity)
+        : removeCartController(data._id)
+    );
+    const carts = await Promise.all(cartsPromise);
+    const isAllSuccess =
+      carts.filter((cart) => cart.statusCode !== 200).length === 0;
 
+    if (isAllSuccess)
       setTableData((prev) => {
         const updatedTable =
-          cart.data?.map((c) => ({
+          carts[carts.length - 1].data?.map((c) => ({
             _id: c.product._id,
             image: c.product.imageUrl[0],
             name: c.product.name,
@@ -47,13 +51,11 @@ const useCartTable = (
 
         return updatedTable;
       });
-    },
-    2000
-  );
+  }, 2000);
 
   const editTableData = (productId: string, quantity: number) => {
     setTableDataQuantity(productId, quantity);
-    syncTableData(productId, quantity);
+    syncTableData();
   };
 
   const table = useReactTable({
