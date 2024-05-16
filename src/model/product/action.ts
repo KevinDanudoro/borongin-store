@@ -5,10 +5,7 @@ import { createProductSchema } from ".";
 export const getAllProducts = (Cookie?: string) =>
   fetcher.get("/product", Cookie ? { headers: { Cookie } } : {});
 
-export const getProductById = (id: string) =>
-  fetcher.get("/product", {
-    params: { id },
-  });
+export const getProductById = (id: string) => fetcher.get(`/product/${id}`);
 
 export const createProduct = (
   product: z.infer<typeof createProductSchema>,

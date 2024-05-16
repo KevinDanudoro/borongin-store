@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
-import ReduxProvider from "@/components/provider/ReduxProvider";
 import QueryProvider from "@/components/provider/QueryProvider";
 
 const poppins = Poppins({
@@ -27,10 +26,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.className, "bg-background")}>
         <QueryProvider>
-          <ReduxProvider>
-            {children}
-            <Toaster />
-          </ReduxProvider>
+          {children}
+          <Toaster />
         </QueryProvider>
       </body>
     </html>

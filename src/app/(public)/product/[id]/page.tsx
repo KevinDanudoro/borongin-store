@@ -6,6 +6,7 @@ import SectionLayout from "@/components/layout/SectionLayout";
 import ProductDescription from "@/components/section/ProductDescription/ProductDescription";
 import ProductForm from "@/components/section/ProductForm/ProductForm";
 import { Separator } from "@/components/ui/separator";
+import { getDetailProductController } from "@/controller/product";
 
 interface PageProps {
   params: {
@@ -13,16 +14,26 @@ interface PageProps {
   };
 }
 
-const Page: FC<PageProps> = ({ params }) => {
+const Page: FC<PageProps> = async ({ params }) => {
+  const { data: product } = await getDetailProductController(params.id);
   return (
     <main>
       <SectionLayout className="grid gap-12 grid-rows-[auto,auto] lg:grid-rows-none lg:grid-cols-[1fr,400px] my-10">
-        <ProductShowcase />
+        <ProductShowcase
+          images={product?.imageUrl}
+          name={product?.name ?? ""}
+        />
 
         <div className="space-y-4">
-          <ProductDescription />
+          <ProductDescription
+            name={product?.name ?? ""}
+            desc={product?.desc ?? ""}
+            rating={product?.rating ?? 0}
+            price={product?.price ?? 0}
+            reviews={100}
+          />
           <Separator />
-          <ProductForm />
+          <ProductForm productId={product?._id ?? ""} />
         </div>
       </SectionLayout>
     </main>

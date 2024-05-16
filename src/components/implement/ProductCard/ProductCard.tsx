@@ -37,7 +37,7 @@ const ProductCard: FC<ProductCardProps> = ({
   return (
     <div className={cn("space-y-2 group/container", className)} {...props}>
       <div className="w-full aspect-square relative bg-secondary rounded-md overflow-hidden">
-        <Link href={"/product/1"}>
+        <Link href={`/product/${id}`}>
           <Image
             src={imageSrc}
             alt="Product images"
@@ -97,7 +97,7 @@ const ProductCard: FC<ProductCardProps> = ({
         </button>
       </div>
 
-      <Link href={"/product/1"} className="block space-y-2">
+      <Link href={`/product/${id}`} className="block space-y-2">
         <h3 className="text-base text-foreground font-semibold line-clamp-1 group-hover/container:underline">
           {name}
         </h3>

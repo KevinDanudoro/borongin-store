@@ -2,7 +2,6 @@
 
 import React from "react";
 import type { FC } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Heart,
   MessageCircle,
@@ -11,8 +10,6 @@ import {
   Share,
   ShoppingCart,
 } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 import {
   Form,
@@ -23,47 +20,19 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import useSubmitProduct from "@/hooks/components/useSubmitProduct";
 import { Separator } from "@/components/ui/separator";
 
-interface ProductFormProps {}
+interface ProductFormProps {
+  productId: string;
+}
 
-const ProductForm: FC<ProductFormProps> = ({}) => {
-  const { form, onSubmit } = useSubmitProduct();
-
-  const sizeVariant = ["xs", "s", "m", "l", "xl"];
+const ProductForm: FC<ProductFormProps> = ({ productId }) => {
+  const { form, onSubmit } = useSubmitProduct(productId);
 
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={onSubmit}>
-        <div className="flex flex-row items-center">
-          <p className="mr-5">Size: </p>
-
-          <FormField
-            control={form.control}
-            name="size"
-            render={({ field }) => (
-              <ToggleGroup
-                type="single"
-                className="space-x-2"
-                onValueChange={(newValue: string) => field.onChange(newValue)}
-                defaultValue={field.value ?? undefined}
-              >
-                {sizeVariant.map((value) => (
-                  <ToggleGroupItem
-                    key={value}
-                    value={value}
-                    className="text-xs aspect-square border border-foreground data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:border-0 uppercase"
-                  >
-                    {value}
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
-            )}
-          />
-        </div>
-
         <div className="grid grid-cols-[1fr,1fr,auto] gap-4">
           <FormField
             control={form.control}

@@ -27,7 +27,7 @@ const getDefaultValue = (searchParams: ReadonlyURLSearchParams) => {
   return defaultValues.data;
 };
 
-const useSubmitProduct = () => {
+const useSubmitProduct = (productId: string) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -41,9 +41,6 @@ const useSubmitProduct = () => {
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       const params = new URLSearchParams(searchParams.toString());
-      if (name == "size") {
-        params.set(name, value.size ?? "");
-      }
       if (name == "quantity") {
         params.set(name, value.quantity ? value.quantity.toString() : "");
       }
@@ -53,8 +50,9 @@ const useSubmitProduct = () => {
   }, [watch, searchParams, pathname, router]);
 
   const onSubmit = (e: z.infer<typeof buyProductSchema>) => {
-    console.log(e);
-    router.push("/checkout/1");
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("quantity", e.quantity.toString());
+    router.push(`/checkout/product/${productId}?` + params);
   };
 
   return { form, onSubmit: form.handleSubmit(onSubmit) };
