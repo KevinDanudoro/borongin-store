@@ -42,7 +42,12 @@ const SignIn: FC<SignInProps> = ({}) => {
         description: message,
         variant: "success",
       });
-      router.push(searchParams.get("callback") ?? "/");
+
+      const callbackUrl = decodeURIComponent(
+        searchParams.get("callback") ?? ""
+      );
+      if (callbackUrl.length > 0) router.replace(callbackUrl);
+      else router.replace("/");
       router.refresh();
     } else {
       toast({

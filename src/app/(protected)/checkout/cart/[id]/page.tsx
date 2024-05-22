@@ -19,7 +19,6 @@ import { Input } from "@/components/ui/input";
 import Heading2 from "@/components/ui/heading2";
 import SectionLayout from "@/components/layout/SectionLayout";
 import { Separator } from "@/components/ui/separator";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { createTransactionSchema } from "@/model/transaction";
 

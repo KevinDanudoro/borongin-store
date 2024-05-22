@@ -10,18 +10,18 @@ const fetcher = axios.create({
   },
 });
 
-fetcher.interceptors.response.use(
-  (res) => {
-    console.log("response", res.data);
-    return res;
-  },
-  (err) => {
-    if (err instanceof AxiosError) {
-      console.log(err.response?.data);
-      return err.response;
-    }
-    return err;
-  }
-);
+// fetcher.interceptors.response.use(
+//   (res) => {
+//     console.log("response", res.data);
+//     return res;
+//   },
+//   (err) => {
+//     if (err instanceof AxiosError) {
+//       console.log(err.response?.data);
+//       return err.response;
+//     }
+//     return err;
+//   }
+// );
 
 export default fetcher;

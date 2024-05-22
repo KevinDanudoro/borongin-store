@@ -35,7 +35,7 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = ({ params, searchParams }) => {
-  const quantity = parseInt(searchParams.quantity, 10);
+  const quantity = parseInt(searchParams.quantity, 10) ?? 1;
   const { id: productId } = params;
 
   const { toast } = useToast();
@@ -48,7 +48,7 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
   ) => {
     const transactionResponse = await createProductTransactionController(
       productId,
-      quantity
+      quantity ?? 1
     );
 
     if (!transactionResponse.data?.transactionToken)

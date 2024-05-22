@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
 
   if (!decodedToken)
     return NextResponse.redirect(
-      new URL(`/sign-in?callback=${url.pathname}`, url.origin)
+      new URL(`/sign-in?callback=${url.pathname}${url.search}`, url.origin)
     );
 
   return;
