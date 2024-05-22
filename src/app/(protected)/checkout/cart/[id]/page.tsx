@@ -21,7 +21,7 @@ import SectionLayout from "@/components/layout/SectionLayout";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { checkoutProductSchema } from "@/model/product";
+import { createTransactionSchema } from "@/model/transaction";
 
 interface PageProps {
   params: {
@@ -30,8 +30,8 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = ({ params }) => {
-  const form = useForm<z.infer<typeof checkoutProductSchema>>({
-    resolver: zodResolver(checkoutProductSchema),
+  const form = useForm<z.infer<typeof createTransactionSchema>>({
+    resolver: zodResolver(createTransactionSchema),
   });
 
   return (
@@ -159,39 +159,6 @@ const Page: FC<PageProps> = ({ params }) => {
               </div>
             </div>
 
-            <div>
-              <FormField
-                control={form.control}
-                name="payment"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="flex flex-col space-y-1"
-                      >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="bank" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Bank</FormLabel>
-                        </FormItem>
-
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="cod" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            Cash on Delivery
-                          </FormLabel>
-                        </FormItem>
-                      </RadioGroup>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
             <Button type="submit">Make Order</Button>
           </SectionLayout>
         </form>
