@@ -8,7 +8,6 @@ export const createTransactionSchema = z.object({
     .string()
     .min(1)
     .regex(/^(\+[1-9]{1}[0-9]{3,14})?([0-9]{9,14})$/),
-  payment: z.enum(["bank", "cod"]),
 });
 
 export const responseTransactionSchema = z.object({

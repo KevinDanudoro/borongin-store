@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { createTransactionSchema } from "@/model/transaction";
 import { useGetDetailProduct } from "@/hooks/query/product";
 import { createProductTransactionController } from "@/controller/transaction";
+import { useToast } from "@/components/ui/use-toast";
 
 interface PageProps {
   params: {
@@ -38,6 +39,7 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
   const quantity = parseInt(searchParams.quantity, 10);
   const { id: productId } = params;
 
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof createTransactionSchema>>({
     resolver: zodResolver(createTransactionSchema),
   });
@@ -50,7 +52,22 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
       quantity
     );
 
-    console.log({ transactionResponse });
+    if (!transactionResponse.data?.transactionToken)
+      return toast({
+        variant: "destructive",
+        title: "Transaction token is missing",
+        description: "Please try again",
+      });
+
+    const snap = window.snap;
+    if (!snap)
+      return toast({
+        variant: "destructive",
+        title: "Something went wrong on payment gateway",
+        description: "Please try again later",
+      });
+
+    snap.pay(transactionResponse.data.transactionToken);
   };
 
   const { data: product } = useGetDetailProduct(productId);
@@ -186,39 +203,6 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
               </div>
             </div>
 
-            <div>
-              <FormField
-                control={form.control}
-                name="payment"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="flex flex-col space-y-1"
-                      >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="bank" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Bank</FormLabel>
-                        </FormItem>
-
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="cod" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            Cash on Delivery
-                          </FormLabel>
-                        </FormItem>
-                      </RadioGroup>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
             <Button type="submit">Make Order</Button>
           </SectionLayout>
         </form>
