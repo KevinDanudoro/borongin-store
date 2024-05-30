@@ -10,3 +10,6 @@ export const createProductTransaction = (
     {},
     { params: { quantity }, headers: { Cookie } }
   );
+
+export const createCartTransaction = (Cookie: string) =>
+  fetcher.post("/transaction/cart", {}, { headers: { Cookie } });

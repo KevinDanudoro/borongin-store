@@ -56,9 +56,12 @@ const Page: FC<PageProps> = ({}) => {
 
       <Separator className="h-0 my-10" />
 
-      <SectionLayout>
-        <Link href={""}>
+      <SectionLayout className="flex flex-row justify-between">
+        <Link href={"/"}>
           <Button variant="outline">Return To Shop</Button>
+        </Link>
+        <Link href={`/checkout/cart`}>
+          <Button variant="default">Checkout</Button>
         </Link>
       </SectionLayout>
 

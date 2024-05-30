@@ -24,6 +24,7 @@ import { createTransactionSchema } from "@/model/transaction";
 import { useGetDetailProduct } from "@/hooks/query/product";
 import { createProductTransactionController } from "@/controller/transaction";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -39,6 +40,7 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
   const { id: productId } = params;
 
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof createTransactionSchema>>({
     resolver: zodResolver(createTransactionSchema),
   });
@@ -66,7 +68,31 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
         description: "Please try again later",
       });
 
-    snap.pay(transactionResponse.data.transactionToken);
+    snap.pay(transactionResponse.data.transactionToken, {
+      onSuccess: (_) => {
+        router.replace("/");
+      },
+      onPending: (_) => {
+        toast({
+          variant: "destructive",
+          title: "Transaction is in pending",
+          description: "Please pay your order before expire",
+        });
+      },
+      onError: (result) => {
+        toast({
+          variant: "destructive",
+          title: "Error occured on transaction",
+          description: result.status_message,
+        });
+      },
+      onClose: () => {
+        toast({
+          variant: "destructive",
+          title: "Transaction is canceled",
+        });
+      },
+    });
   };
 
   const { data: product } = useGetDetailProduct(productId);
