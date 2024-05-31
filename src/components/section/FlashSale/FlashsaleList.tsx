@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import type { FC } from "react";
 import Link from "next/link";
@@ -10,17 +12,21 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import ProductCard from "@/components/implement/ProductCard/ProductCard";
-import { Button } from "@/components/ui/button";
-import { getFlashsaleProductsController } from "@/controller/product";
-import FlashsaleListError from "./FlashsaleListError";
 import FlashsaleListEmpty from "./FlashsaleListEmpty";
+import { Button } from "@/components/ui/button";
+import { useGetProducts } from "@/hooks/query/product";
+import FlashsaleListError from "./FlashsaleListError";
+import FlashsaleListLoading from "./FlashsaleListLoading";
 
 interface FlashsaleListProps {}
 
-const FlashsaleList: FC<FlashsaleListProps> = async ({}) => {
-  const { data: products, statusCode } = await getFlashsaleProductsController();
+const FlashsaleList: FC<FlashsaleListProps> = ({}) => {
+  const { data: response, isLoading } = useGetProducts();
 
-  if (statusCode !== 200) return <FlashsaleListError />;
+  if (isLoading) return <FlashsaleListLoading />;
+  if (!response || response.statusCode !== 200) return <FlashsaleListError />;
+
+  const { data: products } = response;
 
   return products && products.length > 0 ? (
     <>

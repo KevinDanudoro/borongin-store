@@ -1,6 +1,4 @@
-"use server";
-
-import cookieParser from "@/lib/cookie";
+// import cookieParser from "@/lib/cookie";
 import { controllerWrapper } from "@/lib/wrapper";
 import { getProductSchema } from "@/model/product";
 import { getAllProducts, getProductById } from "@/model/product/action";
@@ -51,7 +49,7 @@ export const getDetailProductController = async (productId: string) => {
 
 export const getProductsController = async () => {
   try {
-    const response = await getAllProducts(cookieParser());
+    const response = await getAllProducts();
     if (response instanceof AxiosError) throw response;
 
     const validResponse = responseSchema.safeParse(response.data);
@@ -96,7 +94,7 @@ export const getProductsController = async () => {
 
 export const getFlashsaleProductsController = async () => {
   try {
-    const response = await getAllProducts(cookieParser());
+    const response = await getAllProducts();
     if (response instanceof AxiosError) throw response;
 
     const validResponse = responseSchema.safeParse(response.data);

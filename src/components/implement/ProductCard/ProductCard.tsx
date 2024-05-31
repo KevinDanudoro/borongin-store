@@ -10,9 +10,11 @@ import { Eye, Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Rating from "@/components/ui/rating";
 import { cn } from "@/lib/utils";
-import { useCartCard } from "@/hooks/components/useCartCard";
-import { useWishlistCard } from "@/hooks/components/useWishlistCard";
 import { ProductCardProps } from ".";
+import {
+  useProductCartMutation,
+  useProductWishlistMutation,
+} from "@/hooks/query/product";
 
 const ProductCard: FC<ProductCardProps> = ({
   id,
@@ -26,11 +28,8 @@ const ProductCard: FC<ProductCardProps> = ({
   isCart,
   ...props
 }) => {
-  const { optWishlist, handleOnWishlistClick } = useWishlistCard(
-    id,
-    isWishlist ?? false
-  );
-  const { optCart, handleOnCartClick } = useCartCard(id, isCart ?? false);
+  const { mutate: mutateWishlist } = useProductWishlistMutation(id);
+  const { mutate: mutateCart } = useProductCartMutation(id);
 
   const discountPrice = discount ? price - Math.ceil(price * discount) : 0;
 
@@ -54,18 +53,18 @@ const ProductCard: FC<ProductCardProps> = ({
         ) : null}
 
         <div className="absolute top-3 right-3 flex flex-col gap-3">
-          {optWishlist !== undefined && (
+          {isWishlist !== undefined && (
             <Button
               size="icon"
               variant="link"
               className="bg-background text-foreground rounded-full w-fit h-fit p-2 group"
-              onClick={handleOnWishlistClick}
+              onClick={() => mutateWishlist(isWishlist === true)}
             >
               <Heart
                 size={18}
                 className={cn({
                   "fill-white stroke-red-500 transition-colors": true,
-                  "fill-red-500 stroke-red-500": optWishlist === true,
+                  "fill-red-500 stroke-red-500": isWishlist === true,
                 })}
               />
             </Button>
@@ -88,14 +87,14 @@ const ProductCard: FC<ProductCardProps> = ({
             "absolute left-0 right-0 bottom-0 bg-foreground text-background h-10 translate-y-[100%] group-hover/container:translate-y-0 z-10 transition-all flex justify-center items-center flex-row gap-4 hover:bg-primary cursor-pointer w-full":
               true,
             "disabled:bg-secondary disabled:hover:bg-secondary disabled:text-secondary-foreground disabled:hover:text-secondary-foreground disabled:cursor-wait":
-              !optCart,
+              !isCart,
             "bg-primary text-primary-foreground disabled:cursor-not-allowed":
-              optCart,
+              isCart,
           })}
-          onClick={() => handleOnCartClick()}
-          disabled={optCart}
+          onClick={() => mutateCart(isCart === true)}
+          disabled={isCart}
         >
-          <ShoppingCart /> {optCart ? "Already in Cart" : "Add To Cart"}
+          <ShoppingCart /> {isCart ? "Already in Cart" : "Add To Cart"}
         </button>
       </div>
 

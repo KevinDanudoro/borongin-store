@@ -9,16 +9,8 @@ import { AxiosError } from "axios";
 import { getWishlistSchema } from "@/model/wishlist";
 
 export const getWishlistController = async () => {
-  const cookie = cookieParser();
-  if (!cookie)
-    return controllerWrapper({
-      data: null,
-      statusCode: 400,
-      message: "Cookie is missing",
-    });
-
   try {
-    const response = await getWishlist(cookie);
+    const response = await getWishlist();
     if (response instanceof AxiosError) throw response;
 
     const validResponse = responseSchema.safeParse(response.data);
@@ -63,8 +55,7 @@ export const getWishlistController = async () => {
 
 export const addWishlistController = async (productId: string) => {
   try {
-    const cookie = cookieParser() ?? "";
-    const response = await addWishlist(productId, cookie);
+    const response = await addWishlist(productId);
     if (!response.data)
       return controllerWrapper({
         data: null,
@@ -99,8 +90,7 @@ export const addWishlistController = async (productId: string) => {
 
 export const removeWishlistController = async (productId: string) => {
   try {
-    const cookie = cookieParser() ?? "";
-    const response = await removeWishlist(productId, cookie);
+    const response = await removeWishlist(productId);
     if (!response.data)
       return controllerWrapper({
         data: null,

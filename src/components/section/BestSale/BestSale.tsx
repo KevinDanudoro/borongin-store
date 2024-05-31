@@ -1,15 +1,22 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Flag from "@/components/ui/flag";
 import Heading2 from "@/components/ui/heading2";
 import ProductCard from "@/components/implement/ProductCard";
 import React from "react";
 import type { FC } from "react";
-import { getProductsController } from "@/controller/product";
+import { useGetProducts } from "@/hooks/query/product";
 
 interface BestSaleProps {}
 
-const BestSale: FC<BestSaleProps> = async ({}) => {
-  const { data: products, statusCode } = await getProductsController();
+const BestSale: FC<BestSaleProps> = ({}) => {
+  const { data: response, isLoading } = useGetProducts();
+
+  if (isLoading) return "Loading";
+  if (!response || response.statusCode !== 200) return "Error";
+
+  const { data: products } = response;
 
   return (
     <>

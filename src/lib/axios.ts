@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 const fetcher = axios.create({
-  baseURL: process.env.API_ENDPOINT,
+  baseURL: process.env.API_ENDPOINT || "http://localhost:4000",
   timeout: 10000,
   withCredentials: true,
   headers: {
