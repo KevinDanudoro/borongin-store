@@ -4,10 +4,13 @@ import Heading2 from "@/components/ui/heading2";
 import ProductCard from "@/components/implement/ProductCard";
 import React from "react";
 import type { FC } from "react";
+import { getProductsController } from "@/controller/product";
 
 interface BestSaleProps {}
 
-const BestSale: FC<BestSaleProps> = ({}) => {
+const BestSale: FC<BestSaleProps> = async ({}) => {
+  const { data: products, statusCode } = await getProductsController();
+
   return (
     <>
       <Flag className="mb-4">{"This Month"}</Flag>
@@ -16,16 +19,17 @@ const BestSale: FC<BestSaleProps> = ({}) => {
         <Button className="px-10">View All</Button>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-x-4 gap-y-8 md:flex flex-row justify-between">
-        {Array.from({ length: 4 }).map((_, i) => (
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 md:gap-8">
+        {products?.map((product) => (
           <ProductCard
-            id={"1"}
-            key={i}
-            name="S Series Chair"
-            price={100000 * (i + 1)}
-            imageSrc="/image/product.png"
-            rating={4.3}
-            isWishlist={false}
+            key={product._id}
+            id={product._id}
+            name={product.name}
+            price={product.price}
+            imageSrc={product.imageUrl[0]}
+            rating={0}
+            isWishlist={product.isWishlist ?? false}
+            isCart={product.isCart ?? false}
           />
         ))}
       </div>

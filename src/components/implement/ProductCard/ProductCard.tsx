@@ -46,11 +46,13 @@ const ProductCard: FC<ProductCardProps> = ({
             className="object-contain w-full p-8"
           />
         </Link>
-        {discount && (
+
+        {discount ? (
           <small className="bg-primary px-2 py-1 rounded-md absolute top-4 left-4 text-primary-foreground">
             -{Math.floor(discount * 100)}%
           </small>
-        )}
+        ) : null}
+
         <div className="absolute top-3 right-3 flex flex-col gap-3">
           {optWishlist !== undefined && (
             <Button

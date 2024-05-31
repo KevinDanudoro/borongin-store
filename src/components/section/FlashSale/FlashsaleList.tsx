@@ -26,16 +26,16 @@ const FlashsaleList: FC<FlashsaleListProps> = async ({}) => {
     <>
       <Carousel opts={{ dragFree: true, slidesToScroll: "auto" }}>
         <CarouselContent className="cursor-grab active:cursor-grabbing select-none m-0 mx-10 md:mx-16 mb-8">
-          {products.map((product, i) => (
+          {products.map((product) => (
             <CarouselItem
-              className="px-1 md:px-3 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
-              key={i}
+              className="px-2 md:px-3 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
+              key={product._id}
             >
               <ProductCard
                 id={product._id}
                 name={product.name}
                 price={product.price}
-                discount={0.05 * (i + 1)}
+                discount={0}
                 imageSrc={product.imageUrl[0]}
                 rating={product.rating}
                 isWishlist={product.isWishlist ?? false}
