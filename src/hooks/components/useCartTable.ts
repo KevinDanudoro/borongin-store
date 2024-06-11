@@ -51,7 +51,7 @@ const useCartTable = (
 
         return updatedTable;
       });
-  }, 2000);
+  }, 1000);
 
   const editTableData = (productId: string, quantity: number) => {
     setTableDataQuantity(productId, quantity);

@@ -181,9 +181,12 @@ const Page: FC<PageProps> = () => {
                   width={64}
                   height={64}
                 />
-                <p>{cart.product.name}</p>
+                <p className="text-sm">{cart.product.name} </p>
                 <small className="ml-auto text-sm">
                   Rp.{cart.product.price.toLocaleString("id-ID")}
+                  <span className="text-xs opacity-70 ml-2">
+                    x{cart.quantity}
+                  </span>
                 </small>
               </div>
             ))}

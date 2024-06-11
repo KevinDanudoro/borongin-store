@@ -35,24 +35,38 @@ export const useProductWishlistMutation = (productId: string) => {
       try {
         queryClient.cancelQueries({ queryKey: ["product"] });
 
-        const { data, statusCode, message } = responseSchema.parse(
+        const response = responseSchema.parse(
           queryClient.getQueryData(["product"])
         );
-        const prevData = getProductSchema.array().parse(data);
-        const currData = prevData.map((prodData) =>
+        const prevData = {
+          data: getProductSchema.array().parse(response.data),
+          statusCode: response.statusCode,
+          message: response.message,
+        };
+
+        const currData = prevData.data.map((prodData) =>
           prodData._id === productId
             ? { ...prodData, isWishlist: !isWishlist }
             : { ...prodData }
         );
-
-        queryClient.setQueryData(["product"], {
+        const optimisticData = {
           data: currData,
-          statusCode,
-          message,
-        });
+          statusCode: response.statusCode,
+          message: response.message,
+        };
+
+        queryClient.setQueryData(["product"], optimisticData);
+        return { prevData };
       } catch (err) {
         if (err instanceof Error) console.log("Error", err.message);
       }
+    },
+    onError: (_, __, context) => {
+      if (context?.prevData !== undefined)
+        queryClient.setQueryData(["product"], context.prevData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["product"] });
     },
   });
 };
@@ -69,24 +83,37 @@ export const useProductCartMutation = (productId: string) => {
       try {
         queryClient.cancelQueries({ queryKey: ["product"] });
 
-        const { data, statusCode, message } = responseSchema.parse(
+        const response = responseSchema.parse(
           queryClient.getQueryData(["product"])
         );
-        const prevData = getProductSchema.array().parse(data);
-        const currData = prevData.map((prodData) =>
-          prodData._id === productId
-            ? { ...prodData, isCart: !isCart }
-            : { ...prodData }
+        const prevData = {
+          data: getProductSchema.array().parse(response.data),
+          statusCode: response.statusCode,
+          message: response.message,
+        };
+        const currData = prevData.data.map((product) =>
+          product._id === productId
+            ? { ...product, isCart: !isCart }
+            : { ...product }
         );
-
-        queryClient.setQueryData(["product"], {
+        const optimisticData = {
           data: currData,
-          statusCode,
-          message,
-        });
+          statusCode: response.statusCode,
+          message: response.message,
+        };
+
+        queryClient.setQueryData(["product"], optimisticData);
+        return { prevData };
       } catch (err) {
         if (err instanceof Error) console.log("Error", err.message);
       }
+    },
+    onError: (_, __, context) => {
+      if (context?.prevData !== undefined)
+        queryClient.setQueryData(["product"], context.prevData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["product"] });
     },
   });
 };
