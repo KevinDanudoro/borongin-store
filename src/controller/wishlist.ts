@@ -1,13 +1,17 @@
+"use server";
+
 import { controllerWrapper } from "@/lib/wrapper";
 import { getWishlist } from "@/model/wishlist/action";
 import { responseSchema } from "@/model/respone";
 import { addWishlist, removeWishlist } from "@/model/wishlist/action";
 import { AxiosError } from "axios";
 import { getWishlistSchema } from "@/model/wishlist";
+import cookieParser from "@/lib/cookie";
 
 export const getWishlistController = async () => {
   try {
-    const response = await getWishlist();
+    const cookie = cookieParser() ?? "";
+    const response = await getWishlist(cookie);
     if (response instanceof AxiosError) throw response;
 
     const validResponse = responseSchema.safeParse(response.data);
@@ -52,7 +56,8 @@ export const getWishlistController = async () => {
 
 export const addWishlistController = async (productId: string) => {
   try {
-    const response = await addWishlist(productId);
+    const cookie = cookieParser() ?? "";
+    const response = await addWishlist(productId, cookie);
     if (!response.data)
       return controllerWrapper({
         data: null,
@@ -87,7 +92,8 @@ export const addWishlistController = async (productId: string) => {
 
 export const removeWishlistController = async (productId: string) => {
   try {
-    const response = await removeWishlist(productId);
+    const cookie = cookieParser() ?? "";
+    const response = await removeWishlist(productId, cookie);
     if (!response.data)
       return controllerWrapper({
         data: null,
