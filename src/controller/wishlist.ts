@@ -1,6 +1,3 @@
-"use server";
-
-import cookieParser from "@/lib/cookie";
 import { controllerWrapper } from "@/lib/wrapper";
 import { getWishlist } from "@/model/wishlist/action";
 import { responseSchema } from "@/model/respone";
