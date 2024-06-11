@@ -214,7 +214,12 @@ const Page: FC<PageProps> = () => {
               </div>
             </div>
 
-            <Button type="submit">Make Order</Button>
+            <Button
+              type="submit"
+              disabled={form.formState.isLoading || form.formState.isSubmitting}
+            >
+              Make Order
+            </Button>
           </SectionLayout>
         </form>
       </Form>

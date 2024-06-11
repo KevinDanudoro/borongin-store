@@ -96,7 +96,7 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
   };
 
   const { data: product } = useGetDetailProduct(productId);
-  const shipping = 30000;
+  const shipping = 0;
 
   return (
     <main>
@@ -228,7 +228,12 @@ const Page: FC<PageProps> = ({ params, searchParams }) => {
               </div>
             </div>
 
-            <Button type="submit">Make Order</Button>
+            <Button
+              type="submit"
+              disabled={form.formState.isLoading || form.formState.isSubmitting}
+            >
+              Make Order
+            </Button>
           </SectionLayout>
         </form>
       </Form>
