@@ -3,6 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useGetWishlist = () =>
   useQuery({
-    queryKey: ["wishlist"],
+    queryKey: ["product", "wishlist"],
     queryFn: () => getWishlistController(),
   });
