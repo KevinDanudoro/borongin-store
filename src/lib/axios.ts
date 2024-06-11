@@ -1,7 +1,12 @@
 import axios, { AxiosError } from "axios";
 
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://borongin.vercel.app"
+    : "http://localhost:4000";
+
 const fetcher = axios.create({
-  baseURL: process.env.API_ENDPOINT || "http://localhost:4000",
+  baseURL: process.env.API_ENDPOINT || url,
   timeout: 10000,
   withCredentials: true,
   headers: {
