@@ -1,3 +1,5 @@
+"use server";
+
 import cookieParser from "@/lib/cookie";
 import { controllerWrapper } from "@/lib/wrapper";
 import { getProductSchema } from "@/model/product";
